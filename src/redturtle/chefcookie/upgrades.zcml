@@ -19,19 +19,9 @@
       destination="1100"
       >
     <genericsetup:upgradeStep
-        title="Move analytics and functional label into tech_cookies_specific_labels"
+        title="Add new fields, move analytics and functional label into tech_cookies_specific_labels"
         handler=".upgrades.to_1100"
         />
   </genericsetup:upgradeSteps>
 
-  <genericsetup:upgradeSteps
-      profile="redturtle.chefcookie:default"
-      source="1001"
-      destination="1002"
-      >
-    <genericsetup:upgradeStep
-        title="Update registry to add field to handle anchor transformation"
-        handler=".upgrades.update_to_1002"
-        />
-  </genericsetup:upgradeSteps>
 </configure>

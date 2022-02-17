@@ -90,7 +90,12 @@ class ChefcookieIframeTransform(object):
         if not self.published or self.published.__name__ in ["edit", "@@edit"]:
             return result
 
-        self.chefcookie_registry_record = registry.forInterface(IChefCookieSettings)
+        try:
+            self.chefcookie_registry_record = registry.forInterface(IChefCookieSettings)
+        except KeyError as e:
+            logger.exception(e)
+            return
+
         if not self.chefcookie_registry_record.enable_cc and domain_allowed(  # noqa
             self.chefcookie_registry_record.domain_whitelist,
             urlparse(self.request.get("URL")).netloc,
@@ -102,11 +107,6 @@ class ChefcookieIframeTransform(object):
         except (AttributeError, TypeError, etree.ParseError):
             return
 
-        try:
-            self.chefcookie_registry_record = registry.forInterface(IChefCookieSettings)
-        except KeyError as e:
-            logger.exception(e)
-            return
         path = "//iframe"
         for iframe in result.tree.xpath(path):
             self.transform_iframe(iframe)
