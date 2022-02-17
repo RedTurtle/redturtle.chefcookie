@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-11 11:01+0000\n"
+"POT-Creation-Date: 2022-02-17 12:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,246 +17,213 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.chefcookie\n"
 
-#: ../profiles/default/controlpanel.xml
+#: redturtle/chefcookie/profiles/default/controlpanel.xml
 msgid "Chefcookie Configuration"
 msgstr ""
 
-#: ../browser/controlpanel.py:28
+#: redturtle/chefcookie/browser/controlpanel.py:28
 msgid "Chefcookie settings"
 msgstr ""
 
-#: ../configure.zcml:35
+#: redturtle/chefcookie/configure.zcml:35
 msgid "Installs the redturtle.chefcookie add-on."
 msgstr ""
 
-#: ../configure.zcml:35
+#: redturtle/chefcookie/configure.zcml:35
 msgid "RedTurtle: Chefcookie"
 msgstr ""
 
-#: ../configure.zcml:43
+#: redturtle/chefcookie/configure.zcml:43
 msgid "RedTurtle: Chefcookie (uninstall)"
 msgstr ""
 
-#: ../configure.zcml:43
+#: redturtle/chefcookie/configure.zcml:43
 msgid "Uninstalls the redturtle.chefcookie add-on."
 msgstr ""
 
-#. Default: "Analytics cookies labels"
-#: ../interfaces.py:207
-msgid "chefcookie_analytics_cookies_labels"
-msgstr ""
-
-#. Default: "If compiled, this will enable the \"Analytics cookies\" flag in the banner."
-#: ../interfaces.py:211
-msgid "chefcookie_analytics_cookies_labels_help"
-msgstr ""
-
-#. Default: "If set and the user has accepted the Analytics cookies, this id will be used to track the user."
-#: ../interfaces.py:54
+#. Default: "If set and the user has accepted the Analytics cookies, this id will be used to track the user. To enable this checkbox in the banner, you also need to add the \"analytics\" labels into \"Technical cookies specific labels\" field."
+#: redturtle/chefcookie/interfaces.py:55
 msgid "chefcookie_analytics_id_help"
 msgstr ""
 
 #. Default: "Analytics Id"
-#: ../interfaces.py:53
+#: redturtle/chefcookie/interfaces.py:54
 msgid "chefcookie_analytics_id_label"
 msgstr ""
 
 #. Default: "If set and the user has accepted the Facebook cookies, this id will be used to track the user."
-#: ../interfaces.py:63
+#: redturtle/chefcookie/interfaces.py:67
 msgid "chefcookie_facebook_id_help"
 msgstr ""
 
 #. Default: "Facebook Id"
-#: ../interfaces.py:62
+#: redturtle/chefcookie/interfaces.py:66
 msgid "chefcookie_facebook_id_label"
 msgstr ""
 
-#. Default: "Functional cookies labels"
-#: ../interfaces.py:193
-msgid "chefcookie_functional_cookies_labels"
-msgstr ""
-
-#. Default: "If compiled, this will enable the \"Functional cookies\" flag in the banner."
-#: ../interfaces.py:197
-msgid "chefcookie_functional_cookies_labels_help"
-msgstr ""
-
 #. Default: "General labels"
-#: ../interfaces.py:173
+#: redturtle/chefcookie/interfaces.py:152
 msgid "chefcookie_general_labels"
 msgstr ""
 
-#: ../interfaces.py:174
+#: redturtle/chefcookie/interfaces.py:153
 msgid "chefcookie_general_labels_help"
 msgstr ""
 
 #. Default: "Insert the text of the banner header. Once per each site languages. If you want to insert a link to the policy page, use the placeholder {policy_url}."
-#: ../interfaces.py:161
+#: redturtle/chefcookie/interfaces.py:140
 msgid "chefcookie_header_help"
 msgstr ""
 
 #. Default: "Banner header"
-#: ../interfaces.py:160
+#: redturtle/chefcookie/interfaces.py:139
 msgid "chefcookie_header_label"
 msgstr ""
 
 #. Default: "If set and the user has accepted the HotJar cookies, this id will be used to track the user."
-#: ../interfaces.py:72
+#: redturtle/chefcookie/interfaces.py:76
 msgid "chefcookie_hotjar_id_help"
 msgstr ""
 
 #. Default: "HotJar Id"
-#: ../interfaces.py:71
+#: redturtle/chefcookie/interfaces.py:75
 msgid "chefcookie_hotjar_id_label"
 msgstr ""
 
 #. Default: "Iframes mapping"
-#: ../interfaces.py:133
+#: redturtle/chefcookie/interfaces.py:114
 msgid "chefcookie_iframes_mapping_labels"
 msgstr ""
 
 #. Default: "Insert a list of mappings between a provider and a list of possible domains for their iframes. If the user blocks their cookies, the iframes will be blocked as well."
-#: ../interfaces.py:136
+#: redturtle/chefcookie/interfaces.py:115
 msgid "chefcookie_iframes_mapping_labels_help"
 msgstr ""
 
 #. Default: "If set and the user has accepted the LinkedIn cookies, this id will be used to track the user."
-#: ../interfaces.py:81
+#: redturtle/chefcookie/interfaces.py:85
 msgid "chefcookie_linkedin_id_help"
 msgstr ""
 
 #. Default: "LinkedIn Id"
-#: ../interfaces.py:80
+#: redturtle/chefcookie/interfaces.py:84
 msgid "chefcookie_linkedin_id_label"
 msgstr ""
 
 #. Default: "Links mapping "
-#: ../interfaces.py:146
+#: redturtle/chefcookie/interfaces.py:125
 msgid "chefcookie_links_mapping_labels"
 msgstr ""
 
 #. Default: "Insert a list of mappings between a provider and a list of possible links xpath selector for their anchor. If the user blocks their cookies, the provider will be blocked as well."
-#: ../interfaces.py:147
+#: redturtle/chefcookie/interfaces.py:126
 msgid "chefcookie_links_mapping_labels_help"
 msgstr ""
 
 #. Default: "Select if your website only provide technical cookies."
-#: ../interfaces.py:116
+#: redturtle/chefcookie/interfaces.py:97
 msgid "chefcookie_only_technical_cookies_help"
 msgstr ""
 
 #. Default: "Only technical cookies"
-#: ../interfaces.py:112
+#: redturtle/chefcookie/interfaces.py:93
 msgid "chefcookie_only_technical_cookies_label"
 msgstr ""
 
 #. Default: "Insert the cookie policy page URL. This can be used in \"Banner header\" field as \"{policy_url}\" to dynamically replace it with the given URL."
-#: ../interfaces.py:125
+#: redturtle/chefcookie/interfaces.py:106
 msgid "chefcookie_policy_url_help"
 msgstr ""
 
 #. Default: "Policy URL"
-#: ../interfaces.py:124
+#: redturtle/chefcookie/interfaces.py:105
 msgid "chefcookie_policy_url_label"
 msgstr ""
 
 #. Default: "Profiling cookies labels"
-#: ../interfaces.py:221
+#: redturtle/chefcookie/interfaces.py:190
 msgid "chefcookie_profiling_cookies_labels"
 msgstr ""
 
-#: ../interfaces.py:225
+#: redturtle/chefcookie/interfaces.py:194
 msgid "chefcookie_profiling_cookies_labels_help"
 msgstr ""
 
 #. Default: "Profiling cookies specific labels"
-#: ../interfaces.py:234
+#: redturtle/chefcookie/interfaces.py:204
 msgid "chefcookie_profiling_cookies_specific_labels"
 msgstr ""
 
 #. Default: "Labels for specific providers. If the relative id/flag is set, this will enable the flag in the banner."
-#: ../interfaces.py:238
+#: redturtle/chefcookie/interfaces.py:208
 msgid "chefcookie_profiling_cookies_specific_labels_help"
 msgstr ""
 
 #. Default: "Technical cookies labels"
-#: ../interfaces.py:181
+#: redturtle/chefcookie/interfaces.py:163
 msgid "chefcookie_technical_cookies_labels"
 msgstr ""
 
-#: ../interfaces.py:185
+#: redturtle/chefcookie/interfaces.py:167
 msgid "chefcookie_technical_cookies_labels_help"
 msgstr ""
 
-#. Default: "Select if you want to add Twitter timeline to consent panel (in profiling cookies section) to allow users disable its tracking."
-#: ../interfaces.py:104
-msgid "chefcookie_twittertimeline_help"
+#. Default: "Technical cookies specific labels"
+#: redturtle/chefcookie/interfaces.py:176
+msgid "chefcookie_technical_cookies_specific_labels"
 msgstr ""
 
-#. Default: "Add Twitter timeline to consent panel"
-#: ../interfaces.py:100
-msgid "chefcookie_twittertimeline_label"
-msgstr ""
-
-#. Default: "Select if you want to add YouTube to consent panel (in profiling cookies section) to allow users disable its tracking."
-#: ../interfaces.py:92
-msgid "chefcookie_youtube_help"
-msgstr ""
-
-#. Default: "Add YouTube to consent panel"
-#: ../interfaces.py:89
-msgid "chefcookie_youtube_label"
+#. Default: "Labels for specific technical cookies."
+#: redturtle/chefcookie/interfaces.py:180
+msgid "chefcookie_technical_cookies_specific_labels_help"
 msgstr ""
 
 #. Default: "You need to enable ${name} cookies to see this content."
-#: ../defaults.py:157
+#: redturtle/chefcookie/defaults.py:139
 msgid "iframe_placeholder_text_1"
 msgstr ""
 
 #. Default: "Please"
-#: ../defaults.py:168
+#: redturtle/chefcookie/defaults.py:150
 msgid "iframe_placeholder_text_2"
 msgstr ""
 
 #. Default: "enable them"
-#: ../defaults.py:175
+#: redturtle/chefcookie/defaults.py:161
 msgid "iframe_placeholder_text_3"
 msgstr ""
 
 #. Default: " or "
-#: ../defaults.py:182
+#: redturtle/chefcookie/defaults.py:171
 msgid "iframe_placeholder_text_4"
 msgstr ""
 
 #. Default: "manage your preferences"
-#: ../defaults.py:189
+#: redturtle/chefcookie/defaults.py:182
 msgid "iframe_placeholder_text_5"
 msgstr ""
 
 #. Default: "JSON root must be a mapping (dict)"
-#: ../interfaces.py:42
+#: redturtle/chefcookie/interfaces.py:44
 msgid "invalid_cfg_no_dict"
 msgstr ""
 
 #. Default: "JSON is not valid, parser complained: ${message}"
-#: ../interfaces.py:32
+#: redturtle/chefcookie/interfaces.py:33
 msgid "invalid_json"
 msgstr ""
 
 #. Default: "Manage cookie settings"
-#: ../browser/cookie_config.py:177
+#: redturtle/chefcookie/browser/cookie_config.py:242
 msgid "manage_cookie_settings_label"
 msgstr ""
 
 #. Default: "Settings"
-#: ../browser/controlpanel.py:12
+#: redturtle/chefcookie/browser/controlpanel.py:12
 msgid "settings_default_label"
 msgstr ""
 
 #. Default: "Labels"
-#: ../browser/controlpanel.py:17
+#: redturtle/chefcookie/browser/controlpanel.py:17
 msgid "settings_labels_label"
-msgstr ""
-
-msgid "twittertimeline"
 msgstr ""

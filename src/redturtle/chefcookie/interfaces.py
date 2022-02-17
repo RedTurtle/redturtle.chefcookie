@@ -28,11 +28,16 @@ def validate_cfg_json(value):
     try:
         jv = json.loads(value)
     except ValueError as e:
+        message = getattr(e, "message", str(e))
         raise Invalid(
             _(
                 "invalid_json",
                 "JSON is not valid, parser complained: ${message}",
-                mapping={"message": "{msg} {pos}".format(msg=e.msg, pos=e.pos)},
+                mapping={
+                    "message": "{msg} {pos}".format(
+                        msg=message, pos=getattr(e, "pos", "")
+                    ),
+                },
             )
         )
     if not isinstance(jv, dict):
@@ -49,7 +54,10 @@ class IChefCookieSettingsConfigs(Schema):
         title=_("chefcookie_analytics_id_label", default=u"Analytics Id"),
         description=_(
             "chefcookie_analytics_id_help",
-            default=u"If set and the user has accepted the Analytics cookies, this id will be used to track the user.",
+            default=u"If set and the user has accepted the Analytics cookies, "
+            "this id will be used to track the user. To enable this checkbox in "
+            'the banner, you also need to add the "analytics" labels into '
+            '"Technical cookies specific labels" field.',
         ),
         required=False,
     )

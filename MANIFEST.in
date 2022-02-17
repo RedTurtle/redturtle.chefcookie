@@ -14,3 +14,4 @@ exclude tox.ini
 exclude .flake8
 prune src/redturtle/chefcookie/browser/static/chefcookie/_build
 prune src/redturtle/chefcookie/browser/static/chefcookie/node_modules
+prune src/redturtle/chefcookie/locales/__pycache__

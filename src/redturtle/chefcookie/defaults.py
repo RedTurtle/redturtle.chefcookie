@@ -50,17 +50,7 @@ LABELS = {
                 "en": "<p>We use functionality cookies to enable specific website functions and to configure the Website depending on your choices.</p>",
                 "it": "<p>Utilizziamo cookie funzionali per abilitare specifiche funzionalità del sito e per configurarlo a seconda delle tue scelte.</p>",
             },
-        },
-        "analytics": {
-            "title": {
-                "en": "Analytics and Site Statistics",
-                "it": "Cookie analytics e statistiche",
-            },
-            "description": {
-                "en": "<p>We use analytics cookies to track user navigation and make some analysis. We don't track any personal information about the user.</p>",
-                "it": "<p>I cookie di Analytics sono usati per analizzare la navigazione sul sito al fine di migliorarla e fornire all'utente un'esperienza di navigazione migliore possibile.</p>",
-            },
-        },
+        }
     },
     "profiling_cookies": {
         "title": {"en": "Profiling Cookies", "it": "Cookie di profilazione"},

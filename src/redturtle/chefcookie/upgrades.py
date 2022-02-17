@@ -31,10 +31,15 @@ def to_1100(context):
         "redturtle.chefcookie.interfaces.IChefCookieSettings.functional_cookies_labels"
     ]
 
+    analytics_id = registry[
+        "redturtle.chefcookie.interfaces.IChefCookieSettings.analytics_id"
+    ]
+
     new_conf = {
         "techcookies": json.loads(functional),
-        "analytics": json.loads(analytics),
     }
+    if analytics_id:
+        new_conf["analytics"] = json.loads(analytics)
 
     if six.PY2:
         new_conf_json = json.dumps(new_conf, indent=4).decode("utf-8")
