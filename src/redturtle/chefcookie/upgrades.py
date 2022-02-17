@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 from plone import api
+from plone.registry.interfaces import IRegistry
 from redturtle.chefcookie.interfaces import IChefCookieSettings
 from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
 
 import json
 import logging
-<<<<<<< HEAD
 import six
-=======
-from plone import api
-from redturtle.chefcookie.interfaces import IChefCookieSettings
->>>>>>> main
 
 logger = logging.getLogger(__name__)
 
