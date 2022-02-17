@@ -13,5 +13,15 @@
         handler=".upgrades.update_registry"
         />
   </genericsetup:upgradeSteps>
+  <genericsetup:upgradeSteps
+      profile="redturtle.chefcookie:default"
+      source="1001"
+      destination="1100"
+      >
+    <genericsetup:upgradeStep
+        title="Move analytics and functional label into tech_cookies_specific_labels"
+        handler=".upgrades.to_1100"
+        />
+  </genericsetup:upgradeSteps>
 
 </configure>

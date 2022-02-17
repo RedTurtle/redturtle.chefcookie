@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+from plone import api
+from redturtle.chefcookie.interfaces import IChefCookieSettings
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
 
+import json
 import logging
-
+import six
 
 logger = logging.getLogger(__name__)
 
@@ -15,3 +20,31 @@ def update_profile(context, profile, run_dependencies=True):
 def update_registry(context):
     update_profile(context, "plone.app.registry", run_dependencies=False)
     logger.info("Update registry")
+
+
+def to_1100(context):
+    registry = getUtility(IRegistry)
+    analytics = registry[
+        "redturtle.chefcookie.interfaces.IChefCookieSettings.analytics_cookies_labels"
+    ]
+    functional = registry[
+        "redturtle.chefcookie.interfaces.IChefCookieSettings.functional_cookies_labels"
+    ]
+
+    new_conf = {
+        "techcookies": json.loads(functional),
+        "analytics": json.loads(analytics),
+    }
+
+    if six.PY2:
+        new_conf_json = json.dumps(new_conf, indent=4).decode("utf-8")
+    else:
+        new_conf_json = json.dumps(new_conf, indent=4)
+
+    update_registry(context)
+
+    api.portal.set_registry_record(
+        "technical_cookies_specific_labels",
+        new_conf_json,
+        interface=IChefCookieSettings,
+    )

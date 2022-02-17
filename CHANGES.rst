@@ -6,7 +6,8 @@ Changelog
 
 - Do not use $ but vanilla javascript for old Plone sites compatibility.
   [cekk]
-
+- Merge analytics and tech cookies labels into functional cookies field.
+  [cekk]
 
 0.2.2 (2022-01-27)
 ------------------

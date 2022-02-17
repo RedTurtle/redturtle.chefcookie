@@ -1,18 +1,22 @@
 # -*- coding: utf-8 -*-
 from lxml import etree, html
+from plone.registry.interfaces import IRegistry
 from plone.transformchain.interfaces import ITransform
 from redturtle.chefcookie.defaults import iframe_placeholder
+from redturtle.chefcookie.interfaces import IChefCookieSettings
+from redturtle.chefcookie.interfaces import IRedturtleChefcookieLayer
+from redturtle.chefcookie.transformers import INodePlaceholder
 from repoze.xmliter.utils import getHTMLSerializer
 from zope.component import adapter
+from zope.component import getUtility
+from zope.component import queryAdapter
+from zope.component.interfaces import ComponentLookupError
 from zope.interface import implementer
 from zope.interface import Interface
-from redturtle.chefcookie.interfaces import IChefCookieSettings
-from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
-from zope.component import queryAdapter
-from redturtle.chefcookie.transformers import INodePlaceholder
-from zope.component.interfaces import ComponentLookupError
-from redturtle.chefcookie.interfaces import IRedturtleChefcookieLayer
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @implementer(ITransform)
@@ -84,8 +88,11 @@ class ChefcookieIframeTransform(object):
         except (AttributeError, TypeError, etree.ParseError):
             return
 
-        self.chefcookie_registry_record = registry.forInterface(IChefCookieSettings)
-
+        try:
+            self.chefcookie_registry_record = registry.forInterface(IChefCookieSettings)
+        except KeyError as e:
+            logger.exception(e)
+            return
         path = "//iframe"
         for iframe in result.tree.xpath(path):
             self.transform_iframe(iframe)

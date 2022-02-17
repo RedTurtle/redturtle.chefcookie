@@ -43,21 +43,23 @@ LABELS = {
             "it": "Il sito utilizza cookie tecnici per analizzare il traffico da e verso il sito. I cookie tecnici consento anche di fornire un migliore servizio di navigazione sul sito, e raccolgono informazioni di navigazione a questo scopo.",
         },
     },
-    "functional_cookies": {
-        "title": {"en": "Functional Cookies", "it": "Cookie funzionali"},
-        "description": {
-            "en": "<p>We use functionality cookies to enable specific website functions and to configure the Website depending on your choices.</p>",
-            "it": "<p>Utilizziamo cookie funzionali per abilitare specifiche funzionalità del sito e per configurarlo a seconda delle tue scelte.</p>",
+    "technical_cookies_specific": {
+        "techcookies": {
+            "title": {"en": "Functional Cookies", "it": "Cookie funzionali"},
+            "description": {
+                "en": "<p>We use functionality cookies to enable specific website functions and to configure the Website depending on your choices.</p>",
+                "it": "<p>Utilizziamo cookie funzionali per abilitare specifiche funzionalità del sito e per configurarlo a seconda delle tue scelte.</p>",
+            },
         },
-    },
-    "analytics_cookies": {
-        "title": {
-            "en": "Analytics and Site Statistics",
-            "it": "Cookie analytics e statistiche",
-        },
-        "description": {
-            "en": "<p>We use analytics cookies to track user navigation and make some analysis. We don't track any personal information about the user.</p>",
-            "it": "<p>I cookie di Analytics sono usati per analizzare la navigazione sul sito al fine di migliorarla e fornire all'utente un'esperienza di navigazione migliore possibile.</p>",
+        "analytics": {
+            "title": {
+                "en": "Analytics and Site Statistics",
+                "it": "Cookie analytics e statistiche",
+            },
+            "description": {
+                "en": "<p>We use analytics cookies to track user navigation and make some analysis. We don't track any personal information about the user.</p>",
+                "it": "<p>I cookie di Analytics sono usati per analizzare la navigazione sul sito al fine di migliorarla e fornire all'utente un'esperienza di navigazione migliore possibile.</p>",
+            },
         },
     },
     "profiling_cookies": {
@@ -111,12 +113,9 @@ if six.PY2:
     TECHNICAL_COOKIES_LABELS = json.dumps(LABELS["technical_cookies"], indent=4).decode(
         "utf-8"
     )
-    FUNCTIONAL_COOKIES_LABELS = json.dumps(
-        LABELS["functional_cookies"], indent=4
+    TECHNICAL_COOKIES_SPECIFIC_LABELS = json.dumps(
+        LABELS["technical_cookies_specific"], indent=4
     ).decode("utf-8")
-    ANALYTICS_COOKIES_LABELS = json.dumps(LABELS["analytics_cookies"], indent=4).decode(
-        "utf-8"
-    )
     PROFILING_COOKIES_LABELS = json.dumps(LABELS["profiling_cookies"], indent=4).decode(
         "utf-8"
     )
@@ -127,8 +126,9 @@ else:
     HEADER_LABELS = json.dumps(PANEL_HEADER, indent=4)
     GENERAL_LABELS = json.dumps(LABELS["general"], indent=4)
     TECHNICAL_COOKIES_LABELS = json.dumps(LABELS["technical_cookies"], indent=4)
-    FUNCTIONAL_COOKIES_LABELS = json.dumps(LABELS["functional_cookies"], indent=4)
-    ANALYTICS_COOKIES_LABELS = json.dumps(LABELS["analytics_cookies"], indent=4)
+    TECHNICAL_COOKIES_SPECIFIC_LABELS = json.dumps(
+        LABELS["technical_cookies_specific"], indent=4
+    )
     PROFILING_COOKIES_LABELS = json.dumps(LABELS["profiling_cookies"], indent=4)
     PROFILING_COOKIES_SPECIFIC_LABELS = json.dumps(
         LABELS["profiling_cookies_specific"], indent=4

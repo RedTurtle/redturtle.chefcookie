@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
+from plone.autoform import directives
 from redturtle.chefcookie import _
-from redturtle.chefcookie.defaults import HEADER_LABELS
-from redturtle.chefcookie.defaults import GENERAL_LABELS
-from redturtle.chefcookie.defaults import TECHNICAL_COOKIES_LABELS
-from redturtle.chefcookie.defaults import FUNCTIONAL_COOKIES_LABELS
-from redturtle.chefcookie.defaults import IFRAMES_MAPPING
 from redturtle.chefcookie.defaults import ANCHOR_MAPPING
-from redturtle.chefcookie.defaults import ANALYTICS_COOKIES_LABELS
+from redturtle.chefcookie.defaults import GENERAL_LABELS
+from redturtle.chefcookie.defaults import HEADER_LABELS
+from redturtle.chefcookie.defaults import IFRAMES_MAPPING
 from redturtle.chefcookie.defaults import PROFILING_COOKIES_LABELS
 from redturtle.chefcookie.defaults import PROFILING_COOKIES_SPECIFIC_LABELS
+from redturtle.chefcookie.defaults import TECHNICAL_COOKIES_LABELS
+from redturtle.chefcookie.defaults import TECHNICAL_COOKIES_SPECIFIC_LABELS
 from zope import schema
 from zope.interface import Invalid
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
@@ -164,30 +164,16 @@ class IChefCookieSettingsLabels(Schema):
         constraint=validate_cfg_json,
         required=False,
     )
-    functional_cookies_labels = schema.SourceText(
+    technical_cookies_specific_labels = schema.SourceText(
         title=_(
-            "chefcookie_functional_cookies_labels",
-            default=u"Functional cookies labels",
+            "chefcookie_technical_cookies_specific_labels",
+            default=u"Technical cookies specific labels",
         ),
         description=_(
-            "chefcookie_functional_cookies_labels_help",
-            default='If compiled, this will enable the "Functional cookies" flag in the banner.',
+            "chefcookie_technical_cookies_specific_labels_help",
+            default=u"Labels for specific technical cookies.",
         ),
-        default=FUNCTIONAL_COOKIES_LABELS,
-        constraint=validate_cfg_json,
-        required=False,
-    )
-
-    analytics_cookies_labels = schema.SourceText(
-        title=_(
-            "chefcookie_analytics_cookies_labels",
-            default=u"Analytics cookies labels",
-        ),
-        description=_(
-            "chefcookie_analytics_cookies_labels_help",
-            default='If compiled, this will enable the "Analytics cookies" flag in the banner.',
-        ),
-        default=ANALYTICS_COOKIES_LABELS,
+        default=TECHNICAL_COOKIES_SPECIFIC_LABELS,
         constraint=validate_cfg_json,
         required=True,
     )
