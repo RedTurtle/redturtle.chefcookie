@@ -6,7 +6,12 @@ from plone.registry.interfaces import IRegistry
 
 import json
 import logging
+<<<<<<< HEAD
 import six
+=======
+from plone import api
+from redturtle.chefcookie.interfaces import IChefCookieSettings
+>>>>>>> main
 
 logger = logging.getLogger(__name__)
 
@@ -53,3 +58,5 @@ def to_1100(context):
         new_conf_json,
         interface=IChefCookieSettings,
     )
+
+    api.portal.set_registry_record("enable_cc", True, interface=IChefCookieSettings)

@@ -117,6 +117,31 @@ msgstr ""
 msgid "chefcookie_links_mapping_labels_help"
 msgstr ""
 
+#. Default: "Matomo cookies labels"
+#: ../interfaces.py:231
+msgid "chefcookie_matomo_cookies_labels"
+msgstr ""
+
+#. Default: "If compiled, this will enable the \"Matomo\" flag in the banner."
+#: ../interfaces.py:235
+msgid "chefcookie_matomo_cookies_labels_help"
+msgstr ""
+
+#. Default: "If set and the user has accepted the Matomo cookies, this id will be used to track the user."
+#: ../interfaces.py:89
+msgid "chefcookie_matomo_id_help"
+msgstr ""
+
+#. Default: "Matomo Id"
+#: ../interfaces.py:88
+msgid "chefcookie_matomo_id_label"
+msgstr ""
+
+#. Default: "Select to use chefcookie"
+#: ../interfaces.py:55
+msgid "chefcookie_only_enable_chefcookie_help"
+msgstr ""
+
 #. Default: "Select if your website only provide technical cookies."
 #: redturtle/chefcookie/interfaces.py:97
 msgid "chefcookie_only_technical_cookies_help"
@@ -154,6 +179,16 @@ msgstr ""
 #. Default: "Labels for specific providers. If the relative id/flag is set, this will enable the flag in the banner."
 #: redturtle/chefcookie/interfaces.py:208
 msgid "chefcookie_profiling_cookies_specific_labels_help"
+msgstr ""
+
+#. Default: "If set and chefcookie will send usage data to endpoint"
+#: ../interfaces.py:73
+msgid "chefcookie_registry_endpoint_help"
+msgstr ""
+
+#. Default: "Registry endpoint"
+#: ../interfaces.py:70
+msgid "chefcookie_registry_endpoint_label"
 msgstr ""
 
 #. Default: "Technical cookies labels"

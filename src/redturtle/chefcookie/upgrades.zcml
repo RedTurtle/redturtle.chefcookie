@@ -24,4 +24,14 @@
         />
   </genericsetup:upgradeSteps>
 
+  <genericsetup:upgradeSteps
+      profile="redturtle.chefcookie:default"
+      source="1001"
+      destination="1002"
+      >
+    <genericsetup:upgradeStep
+        title="Update registry to add field to handle anchor transformation"
+        handler=".upgrades.update_to_1002"
+        />
+  </genericsetup:upgradeSteps>
 </configure>

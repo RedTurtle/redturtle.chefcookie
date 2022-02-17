@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from plone.autoform import directives
 from redturtle.chefcookie import _
 from redturtle.chefcookie.defaults import ANCHOR_MAPPING
 from redturtle.chefcookie.defaults import GENERAL_LABELS
@@ -50,6 +49,45 @@ class IRedturtleChefcookieLayer(IDefaultBrowserLayer):
 
 
 class IChefCookieSettingsConfigs(Schema):
+    enable_cc = schema.Bool(
+        title=_(
+            "chefcookie_enable_label",
+            default=u"Enable chefcookie",
+        ),
+        description=_(
+            "chefcookie_only_enable_chefcookie_help",
+            default=u"Select to use chefcookie",
+        ),
+        required=False,
+    )
+    cookie_name = schema.TextLine(
+        title=_("chefcookie_cookie_prefix_label", default=u"Cookie prefix"),
+        description=_(
+            "chefcookie_cookie_prefix_help",
+            default=u"Set the cookie prefix",
+        ),
+        default=u"cc_",
+        required=True,
+    )
+    registry_endpoint = schema.TextLine(
+        title=_("chefcookie_registry_endpoint_label", default=u"Registry endpoint"),
+        description=_(
+            "chefcookie_registry_endpoint_help",
+            default=u"If set and chefcookie will send usage data to endpoint",
+        ),
+        required=False,
+    )
+    domain_whitelist = schema.List(
+        title=_("chefcookie_domain_whitelist_labels", default=u"Domain whitelist"),
+        description=_(
+            "chefcookie_domain_whitelist_labels_help",
+            default=u"Insert a list of domains for which the banner should be used. Useful when we can visit a site with multiple domains",
+        ),
+        missing_value=[],
+        default=[],
+        value_type=schema.TextLine(),
+        required=False,
+    )
     analytics_id = schema.TextLine(
         title=_("chefcookie_analytics_id_label", default=u"Analytics Id"),
         description=_(
@@ -61,7 +99,14 @@ class IChefCookieSettingsConfigs(Schema):
         ),
         required=False,
     )
-
+    matomo_id = schema.TextLine(
+        title=_("chefcookie_matomo_id_label", default=u"Matomo Id"),
+        description=_(
+            "chefcookie_matomo_id_help",
+            default=u"If set and the user has accepted the Matomo cookies, this id will be used to track the user.",
+        ),
+        required=False,
+    )
     facebook_id = schema.TextLine(
         title=_("chefcookie_facebook_id_label", default=u"Facebook Id"),
         description=_(
@@ -185,7 +230,6 @@ class IChefCookieSettingsLabels(Schema):
         constraint=validate_cfg_json,
         required=True,
     )
-
     profiling_cookies_labels = schema.SourceText(
         title=_(
             "chefcookie_profiling_cookies_labels",

@@ -43,4 +43,12 @@
       layer="redturtle.chefcookie.interfaces.IRedturtleChefcookieLayer"
       />
 
+  <browser:page
+      name="cc_consent_registry"
+      for="*"
+      class=".chefcookie_consent_registry.ConsentTracking"
+      permission="zope.Public"
+      layer="redturtle.chefcookie.interfaces.IRedturtleChefcookieLayer"
+      />
+
 </configure>

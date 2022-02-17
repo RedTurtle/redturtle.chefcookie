@@ -4,6 +4,16 @@ Changelog
 0.2.3 (unreleased)
 ------------------
 
+- add flag to control panel that allow to enable cookie banner
+- add cookie prefix to control panel to control the js plugin option
+- allow to select endpoint for consent registry
+- add domain whitelist so in case you have site with multiple domain can show 
+  the banner in selected domain
+- add matomo
+- some minor fix to prevent cases where site editor remove configuration lines 
+  partially
+- add log tracking to new introduced actions
+  [lucabel]
 - Do not use $ but vanilla javascript for old Plone sites compatibility.
   [cekk]
 - Merge analytics and tech cookies labels into functional cookies field.

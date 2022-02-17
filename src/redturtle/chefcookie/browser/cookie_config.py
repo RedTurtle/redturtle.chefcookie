@@ -146,8 +146,9 @@ var cc = new redturtlechefcookie({
   accept_all_if_settings_closed: false,
   show_decline_button: true,
   scripts_selection: "true", // false|true|'collapse'
-  debug_log: true,
-  consent_tracking: null, // '/wp-json/v1/track-consent.php'
+  debug_log: false,
+  cookie_prefix: {cookie_prefix},
+  consent_tracking: {consent_tracking_placeholder}, // '/wp-json/v1/track-consent.php'
   expiration: 180, // in days
   exclude_google_pagespeed: false,
   style: {
@@ -185,6 +186,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
   cc.registerEventListener(document, "click", e => {
     if (
       e.target.hasAttribute("data-cc-open-settings") ||
@@ -210,12 +217,14 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
       cc.setCookieToHideOverlay();
       cc.close();
+      cc.logTracking('close_by_x', getCookie(cc.getCookieName('accepted_providers')));
       e.preventDefault();
     }
     if (e.target.hasAttribute("data-cc-accept-all")) {
       cc.acceptAllScripts();
       cc.setCookieToHideOverlay();
       cc.close();
+      cc.logTracking('accept_all', getCookie(cc.getCookieName('accepted_providers')));
       e.preventDefault();
     }
   });
@@ -248,6 +257,11 @@ class View(BrowserView):
         manage_cc_open = "data-cc-open-settings"
         if self.get_only_technical_cookies_values():
             manage_cc_open = "data-cc-open"
+
+        endpoint = self.get_registry_settings("registry_endpoint")
+        consent_traccking_url = endpoint and '"{}"'.format(endpoint) or "null"
+
+        cookie_prefix = '"{}"'.format(self.get_registry_settings("cookie_name"))
 
         if six.PY2:
             manage_cookie_label = manage_cookie_label.encode("utf-8")
@@ -286,6 +300,8 @@ class View(BrowserView):
                 "{data_cc_open_placeholder}",
                 manage_cc_open,
             )
+            .replace("{consent_tracking_placeholder}", consent_traccking_url)
+            .replace("{cookie_prefix}", cookie_prefix)
         )
 
     @view.memoize
@@ -343,6 +359,7 @@ class View(BrowserView):
         )
 
         analytics_id = self.get_registry_settings(name="analytics_id")
+        matomo_id = self.get_registry_settings(name="matomo_id")
 
         if labels:
             res.update(json.loads(labels))
@@ -353,6 +370,8 @@ class View(BrowserView):
             scripts[name] = value
             if name == "analytics" and analytics_id:
                 scripts[name]["id"] = analytics_id
+            if name == "matomo" and matomo_id:
+                scripts[name]["id"] = matomo_id
 
         if scripts:
             res.update({"scripts": scripts})
@@ -438,7 +457,7 @@ class View(BrowserView):
         data = self.get_registry_settings(name="iframes_mapping")
 
         res = []
-        for mapping in data:
+        for mapping in filter(bool, data):
             id, domains = mapping.split("|")
             res.append(id)
         return res
@@ -447,7 +466,7 @@ class View(BrowserView):
         data = self.get_registry_settings(name="links_mapping")
 
         res = []
-        for mapping in data:
+        for mapping in filter(bool, data):
             id, domains = mapping.split("|")
             res.append(id)
         return res

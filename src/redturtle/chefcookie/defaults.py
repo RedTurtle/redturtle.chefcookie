@@ -95,7 +95,7 @@ IFRAMES_MAPPING = [
     u"youtube|youtube.com,youtube-nocookie.com, youtu.be",
     u"facebook|facebook.com",
 ]
-ANCHOR_MAPPING = [u"twitter|twitter-timeline"]
+ANCHOR_MAPPING = [u"twittertimeline|twitter-timeline"]
 
 if six.PY2:
     HEADER_LABELS = json.dumps(PANEL_HEADER, indent=4).decode("utf-8")
@@ -254,3 +254,12 @@ def anchor_placeholder(provider_name):
     )
     tag.append(a_tag_open_cc)
     return tag
+
+
+def domain_allowed(domain_whitelist, current_url):
+    if not filter(bool, domain_whitelist):
+        return True
+    for domain in domain_whitelist:
+        if domain in current_url:
+            return True
+    return False
