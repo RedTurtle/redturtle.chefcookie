@@ -28,18 +28,15 @@ function accept_anchor_based_provider(cc, placeholder_identifier){
         if(cc.isAccepted(name)){
             anchor.setAttribute('href', anchor_href);
             anchor.removeAttribute('hidden');
-            twitter.removeAttribute('hidden');
-            twitter.setAttribute('src', twitter_src);
+
+            // re-add the script to force its execution
+            twitter.parentNode.removeChild(twitter);
+            var newScript = document.createElement('script');
+            newScript.setAttribute('src', twitter_src);
+            newScript.setAttribute('async', '');
+            anchor.after(newScript);
             placeholder.setAttribute('hidden', true);
-        }// else {
-        //   anchor.setAttribute('href', '');
-        //   anchor.setAttribute('hidden', true);
-        //   twitter.setAttribute('hidden', true);
-           // we need to identify the iframe
-        //   debugger;
-        //   twitter.setAttribute('src', );
-        //   placeholder.removeAttribute('hidden');
-        // }
+        }
     });
 }
 
@@ -180,9 +177,11 @@ var cc = new redturtlechefcookie({
 document.addEventListener("DOMContentLoaded", () => {
   cc.init();
   accept_iframe(cc);
+  accept_twitter_timeline(cc);
   document.querySelectorAll(".pat-tiles-management").forEach(el => {
     el.addEventListener("rtTilesLoaded", e => {
       accept_iframe(cc);
+      accept_twitter_timeline(cc);
     });
   });
 
