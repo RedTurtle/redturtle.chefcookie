@@ -6,6 +6,11 @@ from plone import api
 from plone.memoize import view
 from zope.i18n import translate
 
+try:
+    from collections import OrderedDict
+except:
+    pass
+
 import logging
 import json
 import six
@@ -298,8 +303,13 @@ class View(BrowserView):
         try:
             value = api.portal.get_registry_record(name, interface=IChefCookieSettings)
             if load_json:
-                value = json.loads(value)
-            if isinstance(value, six.string_types) and six.PY2:
+                if six.PY2:
+                    value = json.JSONDecoder(object_pairs_hook=OrderedDict).decode(
+                        value
+                    )
+                else:
+                    value = json.loads(value)
+            elif isinstance(value, six.string_types) and six.PY2:
                 value = value.encode("utf-8")
             return value
         except Exception as e:
@@ -354,6 +364,8 @@ class View(BrowserView):
             res.update(json.loads(labels))
 
         scripts = {}
+        if six.PY2:
+            scripts = OrderedDict()
 
         for name, value in specific_labels.items():
             scripts[name] = value
@@ -379,7 +391,6 @@ class View(BrowserView):
         profiling_cookies_specific_labels = self.get_registry_settings(
             name="profiling_cookies_specific_labels", load_json=True
         )
-
         if (
             not hotjar_id  # noqa
             and not linkedin_id  # noqa
@@ -389,6 +400,8 @@ class View(BrowserView):
             return "{}"
 
         scripts = {}
+        if six.PY2:
+            scripts = OrderedDict()
 
         for id, labels in profiling_cookies_specific_labels.items():
             if id in iframe_cookies_ids or id in anchor_cookies_ids:
