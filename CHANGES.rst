@@ -13,6 +13,8 @@ Changelog
 - some minor fix to prevent cases where site editor remove configuration lines 
   partially
 - add log tracking to new introduced actions
+- Fix problem loading twitter timeline in tile manager from
+  redturtle.tiles.management
   [lucabel]
 - Do not use $ but vanilla javascript for old Plone sites compatibility.
   [cekk]

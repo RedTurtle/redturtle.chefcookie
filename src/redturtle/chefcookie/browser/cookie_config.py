@@ -18,6 +18,13 @@ var iframeCookies = {iframe_cookies_ids_placeholder};
 var anchorCookies = {anchor_cookies_ids_placeholder};
 var profiling_cookies_config = {profiling_cookies_config_placeholder};
 
+function accept_all_anchor_based_provider_when_tiles_loaded(cc){
+    var placeholder_identifiers = ['twittertimeline-placeholder'];
+    for (let i = 0; i < placeholder_identifiers.length; i++) {
+        accept_anchor_based_provider(cc, placeholder_identifiers);
+    }
+}
+
 function accept_anchor_based_provider(cc, placeholder_identifier){
     document.querySelectorAll("div." + placeholder_identifier).forEach(function(placeholder) {
         var anchor = placeholder.nextElementSibling;
@@ -28,7 +35,6 @@ function accept_anchor_based_provider(cc, placeholder_identifier){
         if(cc.isAccepted(name)){
             anchor.setAttribute('href', anchor_href);
             anchor.removeAttribute('hidden');
-
             // re-add the script to force its execution
             twitter.parentNode.removeChild(twitter);
             var newScript = document.createElement('script');
@@ -181,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".pat-tiles-management").forEach(el => {
     el.addEventListener("rtTilesLoaded", e => {
       accept_iframe(cc);
-      accept_twitter_timeline(cc);
+      accept_all_anchor_based_provider_when_tiles_loaded(cc);
     });
   });
 
@@ -247,7 +253,7 @@ class View(BrowserView):
         manage_cookie_label = translate(
             _(
                 "manage_cookie_settings_label",
-                default=u"Manage cookie settings",
+                default="Manage cookie settings",
             ),
             context=self.request,
         )

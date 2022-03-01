@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from plone import api
+from plone.protect.interfaces import IDisableCSRFProtection
 from plone.registry.interfaces import IRegistry
 from redturtle.chefcookie.interfaces import IChefCookieSettings
 from zope.component import getUtility
+from zope.interface import alsoProvides
 
 import json
 import logging
@@ -20,6 +22,13 @@ def update_profile(context, profile, run_dependencies=True):
 def update_registry(context):
     update_profile(context, "plone.app.registry", run_dependencies=False)
     logger.info("Update registry")
+
+
+def update_to_1002(context):
+    alsoProvides(context.REQUEST, IDisableCSRFProtection)
+    update_registry(context)
+
+    api.portal.set_registry_record("enable_cc", True, interface=IChefCookieSettings)
 
 
 def to_1100(context):
