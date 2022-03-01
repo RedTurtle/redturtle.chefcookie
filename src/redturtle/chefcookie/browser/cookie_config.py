@@ -8,7 +8,7 @@ from zope.i18n import translate
 
 try:
     from collections import OrderedDict
-except:
+except ImportError:
     pass
 
 import logging
