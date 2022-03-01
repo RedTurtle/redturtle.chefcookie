@@ -81,8 +81,6 @@ function accept_iframe(cc) {
 }
 
 if (Object.keys(profiling_cookies_config).length > 0) {
-    var has_hotjar = {has_hotjar_placeholder};
-
     iframeCookies.forEach(function(name) {
         if (profiling_cookies_config.scripts[name] !== undefined) {
             profiling_cookies_config.scripts[name].accept = (cc, resolve, isInit) => {
@@ -113,23 +111,17 @@ if (Object.keys(profiling_cookies_config).length > 0) {
         }
     });
 
-    if (has_hotjar) {
-        var hjLabels = {hotjar_labels_placeholder};
-        profiling_cookies_config.scripts.hotjar = {
-            id: "{hotjar_id_placeholder}",
-            title: hjLabels.title,
-            description: hjLabels.description,
-            accept: function(cc, resolve, isInit) {
+    if (profiling_cookies_config.scripts.hotjar !== undefined) {
+        profiling_cookies_config.scripts.hotjar.accept = function(cc, resolve, isInit) {
                 var id = cc.config.settings[1].scripts.hotjar.id;
                 var script = document.createElement("script");
                 script.innerHTML =
-                    "(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:" +
+                    "(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:'" +
                     id +
-                    ",hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')";
+                    "',hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')";
                 document.head.appendChild(script);
                 cc.setLoaded("hotjar");
-            },
-        }
+            };
     }
 }
 
@@ -282,13 +274,6 @@ class View(BrowserView):
                 "{profiling_cookies_config_placeholder}",
                 self.get_profiling_cookies_config(),
             )
-            .replace("{has_hotjar_placeholder}", json.dumps(self.has_hotjar()))
-            # .replace("{youtube_labels_placeholder}", self.get_youtube_labels())
-            .replace("{hotjar_labels_placeholder}", self.get_hotjar_labels())
-            .replace(
-                "{hotjar_id_placeholder}",
-                self.get_registry_settings(name="hotjar_id") or "''",
-            )
             .replace("{message_labels_placeholder}", self.get_message_labels())
             .replace("{labels_placeholder}", self.get_labels())
             .replace(
@@ -405,27 +390,24 @@ class View(BrowserView):
 
         scripts = {}
 
-        for iframe_id in iframe_cookies_ids:
-            labels = profiling_cookies_specific_labels.get(iframe_id, {})
-            if labels:
-                scripts[iframe_id] = labels
+        for id, labels in profiling_cookies_specific_labels.items():
+            if id in iframe_cookies_ids or id in anchor_cookies_ids:
+                scripts[id] = labels
 
-        # handle provider base on anchor like twitter timeline
-        for anchor_id in anchor_cookies_ids:
-            labels = profiling_cookies_specific_labels.get(anchor_id, {})
-            if labels:
-                scripts[anchor_id] = labels
+            if facebook_id and id == "facebook":
+                if id not in scripts:
+                    scripts[id] = labels
+                scripts[id]["id"] = facebook_id
 
-        if facebook_id:
-            if "facebook" not in scripts:
-                labels = profiling_cookies_specific_labels.get("facebook", {})
-                if labels:
-                    scripts["facebook"] = labels
-            scripts["facebook"]["id"] = facebook_id
+            if linkedin_id and id == "linkedin":
+                if id not in scripts:
+                    scripts[id] = labels
+                scripts[id]["id"] = linkedin_id
 
-        if linkedin_id and "linkedin" in profiling_cookies_specific_labels:
-            scripts["linkedin"] = {"id": linkedin_id}
-            scripts["linkedin"].update(profiling_cookies_specific_labels["linkedin"])
+            if hotjar_id and id == "hotjar":
+                if id not in scripts:
+                    scripts[id] = labels
+                scripts[id]["id"] = hotjar_id
 
         res = {
             "checked_by_default": False,
@@ -445,17 +427,6 @@ class View(BrowserView):
             return {}
 
         return labels.get(name, {})
-
-    def has_hotjar(self):
-        id = self.get_registry_settings(name="hotjar_id")
-        labels = self.get_profiling_labels_by_name(name="hotjar")
-
-        if id and labels:
-            return True
-        return False
-
-    def get_hotjar_labels(self):
-        return json.dumps(self.get_profiling_labels_by_name(name="hotjar"))
 
     def get_iframe_cookies_ids(self):
         data = self.get_registry_settings(name="iframes_mapping")

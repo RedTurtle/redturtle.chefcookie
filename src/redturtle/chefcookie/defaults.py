@@ -92,10 +92,10 @@ LABELS = {
 }
 
 IFRAMES_MAPPING = [
-    u"youtube|youtube.com,youtube-nocookie.com, youtu.be",
-    u"facebook|facebook.com",
+    "youtube|youtube.com,youtube-nocookie.com, youtu.be",
+    "facebook|facebook.com",
 ]
-ANCHOR_MAPPING = [u"twittertimeline|twitter-timeline"]
+ANCHOR_MAPPING = ["twittertimeline|twitter-timeline"]
 
 if six.PY2:
     HEADER_LABELS = json.dumps(PANEL_HEADER, indent=4).decode("utf-8")
@@ -138,7 +138,7 @@ def iframe_placeholder(name, soup=None):
     p_tag.string = translate(
         _(
             "iframe_placeholder_text_1",
-            default=u"You need to enable ${name} cookies to see this content.",
+            default="You need to enable ${name} cookies to see this content.",
             mapping={"name": name},
         ),
         context=request,
@@ -149,7 +149,7 @@ def iframe_placeholder(name, soup=None):
     span_tag.string = translate(
         _(
             "iframe_placeholder_text_2",
-            default=u"Please",
+            default="Please",
         ),
         context=request,
     )
@@ -160,7 +160,7 @@ def iframe_placeholder(name, soup=None):
     a_tag_enable_yt.string = translate(
         _(
             "iframe_placeholder_text_3",
-            default=u"enable them",
+            default="enable them",
         ),
         context=request,
     )
@@ -170,7 +170,7 @@ def iframe_placeholder(name, soup=None):
     span_tag.string = translate(
         _(
             "iframe_placeholder_text_4",
-            default=u" or ",
+            default=" or ",
         ),
         context=request,
     )
@@ -181,7 +181,7 @@ def iframe_placeholder(name, soup=None):
     a_tag_open_cc.string = translate(
         _(
             "iframe_placeholder_text_5",
-            default=u"manage your preferences",
+            default="manage your preferences",
         ),
         context=request,
     )
@@ -205,7 +205,7 @@ def anchor_placeholder(provider_name):
     p_tag.string = translate(
         _(
             "iframe_placeholder_text_1",
-            default=u"You need to enable ${name} cookies to see this content.",
+            default="You need to enable ${name} cookies to see this content.",
             mapping={"name": human_readable_provider_name},
         ),
         context=request,
@@ -216,7 +216,7 @@ def anchor_placeholder(provider_name):
     span_tag.string = translate(
         _(
             "iframe_placeholder_text_2",
-            default=u"Please",
+            default="Please",
         ),
         context=request,
     )
@@ -227,7 +227,7 @@ def anchor_placeholder(provider_name):
     a_tag_enable_yt.string = translate(
         _(
             "iframe_placeholder_text_3",
-            default=u"enable them",
+            default="enable them",
         ),
         context=request,
     )
@@ -237,7 +237,7 @@ def anchor_placeholder(provider_name):
     span_tag.string = translate(
         _(
             "iframe_placeholder_text_4",
-            default=u" or ",
+            default=" or ",
         ),
         context=request,
     )
@@ -248,7 +248,7 @@ def anchor_placeholder(provider_name):
     a_tag_open_cc.string = translate(
         _(
             "iframe_placeholder_text_5",
-            default=u"manage your preferences",
+            default="manage your preferences",
         ),
         context=request,
     )
@@ -257,6 +257,8 @@ def anchor_placeholder(provider_name):
 
 
 def domain_allowed(domain_whitelist, current_url):
+    if not domain_whitelist:
+        return True
     if not filter(bool, domain_whitelist):
         return True
     for domain in domain_whitelist:
