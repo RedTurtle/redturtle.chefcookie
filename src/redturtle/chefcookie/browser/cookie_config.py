@@ -71,6 +71,8 @@ function accept_iframe(cc) {
         var src = iframe.dataset.ccSrc;
         var name = iframe.dataset.ccName;
         var placeholder = iframe.previousElementSibling;
+        console.log('placeholder: ', placeholder);
+        console.log('name: ', name);
         if (placeholder && src) {
             if(cc.isAccepted(name)){
                 iframe.setAttribute('src', src);
@@ -83,6 +85,26 @@ function accept_iframe(cc) {
             }
         }
     });
+    // handle recaptcha
+    if (cc.isAccepted("recaptcha")) {
+        // re-enable scripts
+        var scripts = document.querySelectorAll('script[data-cc-src*="https://www.google.com/recaptcha/api.js"]');
+        if (scripts.length > 0) {
+            scripts.forEach(function(script) {
+                var scriptSrc = script.dataset.ccSrc;
+                var sibling = script.nextElementSibling;
+                script.parentNode.removeChild(script);
+                var newScript = document.createElement('script');
+                newScript.setAttribute('src', scriptSrc);
+                newScript.setAttribute('async', '');
+                newScript.setAttribute('defer', '');
+                sibling.before(newScript);
+            });
+            document.querySelectorAll('div.iframe-placeholder.recaptcha').forEach(function(placeholder) {
+                placeholder.setAttribute('hidden', true);
+            });
+        }
+    }
 }
 
 if (Object.keys(profiling_cookies_config).length > 0) {

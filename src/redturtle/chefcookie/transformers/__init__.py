@@ -6,8 +6,9 @@ class INodePlaceholder(Interface):
     Provide correct placeholder for a node we need to hide due to GDPR
     """
 
-    def transform_anchor(self, anchor):
+    def transform_node(self, provider, node):
         """
-        @param anchor: the lxml node / anchor we need to transform
+        @param provider: the provider name
+        @param node: the lxml node we need to transform
         @return: the modified anchor and the reative placeholder
         """

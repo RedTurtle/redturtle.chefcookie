@@ -20,6 +20,10 @@ Changelog
   [cekk]
 - Merge analytics and tech cookies labels into functional cookies field.
   [cekk]
+- More extensibility for transformers (now you can set a transform for each provider name).
+  [cekk]
+- Handle recaptcha.
+  [cekk]
 
 0.2.2 (2022-01-27)
 ------------------

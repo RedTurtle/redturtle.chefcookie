@@ -130,7 +130,7 @@ def iframe_placeholder(name, soup=None):
     if not soup:
         soup = BeautifulSoup("", "html.parser")
     tag = soup.new_tag("div")
-    tag["class"] = "iframe-placeholder"
+    tag["class"] = "iframe-placeholder {}".format(name)
     tag[
         "style"
     ] = "padding: 10px; background-color: #eee; border:1px solid #ccc;width:98%; max-width:500px"

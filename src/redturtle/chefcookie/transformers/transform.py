@@ -2,17 +2,19 @@
 from lxml import etree, html
 from plone.registry.interfaces import IRegistry
 from plone.transformchain.interfaces import ITransform
-from redturtle.chefcookie.defaults import iframe_placeholder, domain_allowed
+from redturtle.chefcookie.defaults import domain_allowed
 from redturtle.chefcookie.interfaces import IChefCookieSettings
 from redturtle.chefcookie.interfaces import IRedturtleChefcookieLayer
 from redturtle.chefcookie.transformers import INodePlaceholder
 from repoze.xmliter.utils import getHTMLSerializer
 from zope.component import adapter
 from zope.component import getUtility
-from zope.component import queryAdapter
 from zope.component.interfaces import ComponentLookupError
 from zope.interface import implementer
 from zope.interface import Interface
+from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
+from plone import api
 
 import logging
 import six
@@ -54,19 +56,16 @@ class ChefcookieIframeTransform(object):
 
     def transform_iframe(self, iframe):
         src = iframe.attrib.get("src")
-        config_name = self.get_config_name(src=src)
-        if not config_name:
+        provider = self.get_config_name(src=src)
+        if not provider:
             # no match, no need to mask it
             return
 
-        placeholder = iframe_placeholder(name=config_name).prettify()
-        iframe.attrib.pop("src")
-        iframe.set("data-cc-src", src)
-        iframe.set("data-cc-name", config_name)
-        iframe.set("hidden", "true")
-        placeholder = html.fromstring(placeholder)
-        iframe.addprevious(placeholder)
-        return
+        adapter = self.get_transform_adapter(
+            provider=provider, interface=INodePlaceholder
+        )
+        if adapter:
+            adapter.transform_node(provider=provider, node=iframe)
 
     def transformIterable(self, result, encoding):
         # we pass through this code for every call client made to server,
@@ -82,7 +81,6 @@ class ChefcookieIframeTransform(object):
             # and sometimes getUtility return None... we need to skip this as
             # well
             return
-
         content_type = self.request.response.getHeader("Content-Type")
         if not content_type or not content_type.startswith("text/html"):
             return
@@ -107,8 +105,7 @@ class ChefcookieIframeTransform(object):
         except (AttributeError, TypeError, etree.ParseError):
             return
 
-        path = "//iframe"
-        for iframe in result.tree.xpath(path):
+        for iframe in result.tree.xpath("//iframe"):
             self.transform_iframe(iframe)
 
         path = "//a[@class='{}']"
@@ -117,11 +114,24 @@ class ChefcookieIframeTransform(object):
         for configuration in filter(bool, links_mapping):
             provider, provider_class = configuration.split("|")
             for anchor in result.tree.xpath(path.format(provider_class)):
-                ad = queryAdapter(
-                    anchor,
-                    interface=INodePlaceholder,
-                    name="transform.{}".format(provider),
+                import pdb
+
+                pdb.set_trace()
+                adapter = self.get_transform_adapter(
+                    provider=provider, interface=INodePlaceholder
                 )
-                if ad:
-                    ad.transform_anchor(provider, anchor)
+                if adapter:
+                    adapter.transform_node(provider=provider, node=anchor)
         return result
+
+    def get_transform_adapter(self, provider, interface):
+        adapter = queryMultiAdapter(
+            (api.portal.get(), self.request),
+            interface=interface,
+            name="transform.{}".format(provider),
+        )
+
+        adapter = adapter or getMultiAdapter(
+            (api.portal.get(), self.request), interface=interface
+        )
+        return adapter

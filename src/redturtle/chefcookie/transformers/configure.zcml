@@ -10,11 +10,15 @@
       name="redturtle.chefcookie.ChefcookieIframeTransform"
       />
 
+  <adapter factory=".adapters.DefaultPlaceholder" />
   <adapter
-      factory=".anchor_placeholder.AnchorPlaceholder"
-      provides="redturtle.chefcookie.transformers.INodePlaceholder"
-      for="*"
+      factory=".adapters.RecaptchaPlaceholder"
+      name="transform.recaptcha"
+      />
+  <adapter
+      factory=".adapters.TwitterPlaceholder"
       name="transform.twittertimeline"
       />
+
 
 </configure>
