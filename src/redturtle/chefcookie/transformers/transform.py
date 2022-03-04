@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from lxml import etree, html
+from lxml import etree
+from plone import api
 from plone.registry.interfaces import IRegistry
 from plone.transformchain.interfaces import ITransform
 from redturtle.chefcookie.defaults import domain_allowed
@@ -8,13 +9,12 @@ from redturtle.chefcookie.interfaces import IRedturtleChefcookieLayer
 from redturtle.chefcookie.transformers import INodePlaceholder
 from repoze.xmliter.utils import getHTMLSerializer
 from zope.component import adapter
+from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.component import queryMultiAdapter
 from zope.component.interfaces import ComponentLookupError
 from zope.interface import implementer
 from zope.interface import Interface
-from zope.component import getMultiAdapter
-from zope.component import queryMultiAdapter
-from plone import api
 
 import logging
 import six
