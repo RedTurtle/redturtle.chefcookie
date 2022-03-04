@@ -114,9 +114,6 @@ class ChefcookieIframeTransform(object):
         for configuration in filter(bool, links_mapping):
             provider, provider_class = configuration.split("|")
             for anchor in result.tree.xpath(path.format(provider_class)):
-                import pdb
-
-                pdb.set_trace()
                 adapter = self.get_transform_adapter(
                     provider=provider, interface=INodePlaceholder
                 )
