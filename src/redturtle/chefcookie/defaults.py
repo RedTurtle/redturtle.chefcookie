@@ -177,7 +177,7 @@ def iframe_placeholder(name, soup=None):
     tag.append(span_tag)
 
     a_tag_open_cc = soup.new_tag("a", href="#")
-    a_tag_open_cc["data-cc-open"] = ""
+    a_tag_open_cc["data-cc-open-settings"] = ""
     a_tag_open_cc.string = translate(
         _(
             "iframe_placeholder_text_5",
