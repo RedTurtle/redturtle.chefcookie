@@ -1741,9 +1741,6 @@ export default class chefcookie {
         if (!helper.cookieExists(this.getCookieName('accepted_providers'))) {
             return false;
         }
-        console.log('COOKIE: ', helper.cookieGet(this.getCookieName('accepted_providers')).split(','));
-        console.log('PROVIDER: ', provider);
-        console.log('------------------');
         return helper.cookieGet(this.getCookieName('accepted_providers')).split(',').indexOf(provider) > -1;
     }
 
