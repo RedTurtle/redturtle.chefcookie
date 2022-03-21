@@ -252,9 +252,7 @@ function getCookie(name) {
       e.preventDefault();
     }
   });
-  
   {settings_icon_placeholder}
-  
 });
 """
 
@@ -471,21 +469,21 @@ class View(BrowserView):
         return res
 
     def show_settings_icon(self):
-        if self.get_registry_settings(name="show_settings_icon") == True:
-            manage_cc_open = "data-cc-open-settings"
-            manage_cookie_label = translate(
-                _(
-                    "manage_cookie_settings_label",
-                    default="Manage cookie settings",
-                ),
-                context=self.request,
-            )
-            if six.PY2:
-                manage_cookie_label = manage_cookie_label.encode("utf-8")
-            if self.get_only_technical_cookies_values():
-                manage_cc_open = "data-cc-open"
-            return SETTINGS_ICON_PLACEHOLDER.format(
-                open_settings_placeholder=manage_cookie_label,
-                data_cc_open_placeholder=manage_cc_open,
-            )
-        return ""
+        if self.get_registry_settings(name="show_settings_icon") is False:
+            return ""
+        manage_cc_open = "data-cc-open-settings"
+        manage_cookie_label = translate(
+            _(
+                "manage_cookie_settings_label",
+                default="Manage cookie settings",
+            ),
+            context=self.request,
+        )
+        if six.PY2:
+            manage_cookie_label = manage_cookie_label.encode("utf-8")
+        if self.get_only_technical_cookies_values():
+            manage_cc_open = "data-cc-open"
+        return SETTINGS_ICON_PLACEHOLDER.format(
+            open_settings_placeholder=manage_cookie_label,
+            data_cc_open_placeholder=manage_cc_open,
+        )
