@@ -71,7 +71,7 @@ class IChefCookieSettingsConfigs(Schema):
             "displayed on the right side of the page. You should always allow "
             "users to change their settings, so if you disable this option, be "
             "sure to insert a link somewhere in the page (e.g. in the footer). "
-            "It should be a <a> tag with data-cc-open-settings attribute.",
+            'It should be an "a" tag with data-cc-open-settings attribute.',
         ),
         required=False,
         default=True,

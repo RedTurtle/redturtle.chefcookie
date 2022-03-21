@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-03-21 15:51+0000\n"
+"POT-Creation-Date: 2022-03-21 16:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: RedTurtle Technology <sviluppoplone@redturtle.it>\n"
 "Language-Team: RedTurtle Technology <sviluppoplone@redturtle.it>\n"
@@ -275,10 +275,10 @@ msgstr "Impostazioni"
 msgid "settings_labels_label"
 msgstr "Etichette"
 
-#. Default: "If selected, an icon that opens cookie settings will be displayed on the right side of the page. You should always allow users to change their settings, so if you disable this option, be sure to insert a link somewhere in the page (e.g. in the footer). It should be a <a> tag with data-cc-open-settings attribute."
+#. Default: "If selected, an icon that opens cookie settings will be displayed on the right side of the page. You should always allow users to change their settings, so if you disable this option, be sure to insert a link somewhere in the page (e.g. in the footer). It should be an \"a\" tag with data-cc-open-settings attribute."
 #: redturtle/chefcookie/interfaces.py:68
 msgid "show_settings_icon_help"
-msgstr "Se selezionato, verrà mostrata un'icona, sul lato destro del sito, che permette di aprire le impostazioni dei cookie. Se si disabilita questa opzione, bisogna comunque inserire un link da qualche parte nel sito (ad esempio nel footer). Deve essere un tag <a> con l'attributo data-cc-open-settings."
+msgstr "Se selezionato, verrà mostrata un'icona, sul lato destro del sito, che permette di aprire le impostazioni dei cookie. Se si disabilita questa opzione, bisogna comunque inserire un link da qualche parte nel sito (ad esempio nel footer). Deve essere un tag \"a\" con l'attributo data-cc-open-settings."
 
 #. Default: "Show settings icon"
 #: redturtle/chefcookie/interfaces.py:64

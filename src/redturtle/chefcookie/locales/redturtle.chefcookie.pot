@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-03-21 15:52+0000\n"
+"POT-Creation-Date: 2022-03-21 16:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,7 +278,7 @@ msgstr ""
 msgid "settings_labels_label"
 msgstr ""
 
-#. Default: "If selected, an icon that opens cookie settings will be displayed on the right side of the page. You should always allow users to change their settings, so if you disable this option, be sure to insert a link somewhere in the page (e.g. in the footer). It should be a <a> tag with data-cc-open-settings attribute."
+#. Default: "If selected, an icon that opens cookie settings will be displayed on the right side of the page. You should always allow users to change their settings, so if you disable this option, be sure to insert a link somewhere in the page (e.g. in the footer). It should be an \"a\" tag with data-cc-open-settings attribute."
 #: redturtle/chefcookie/interfaces.py:68
 msgid "show_settings_icon_help"
 msgstr ""
