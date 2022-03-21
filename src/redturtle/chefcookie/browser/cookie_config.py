@@ -252,9 +252,14 @@ function getCookie(name) {
       e.preventDefault();
     }
   });
-
-  document.body.insertAdjacentHTML("beforeend", '<a title="{open_settings_placeholder}" id="cookie-settings-open" {data_cc_open_placeholder}=“” href=“/”><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-lock" class="svg-inline--fa fa-user-lock fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"></path></svg></a>');
+  
+  {settings_icon_placeholder}
+  
 });
+"""
+
+SETTINGS_ICON_PLACEHOLDER = """
+document.body.insertAdjacentHTML("beforeend", '<a title="{open_settings_placeholder}" id="cookie-settings-open" {data_cc_open_placeholder}="" href="/"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-lock" class="svg-inline--fa fa-user-lock fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"></path></svg></a>');
 """
 
 
@@ -269,25 +274,12 @@ class View(BrowserView):
             "Content-type", " application/javascript; charset=utf-8"
         )
         # i can't use format method because there are a lot of brackets
-        manage_cookie_label = translate(
-            _(
-                "manage_cookie_settings_label",
-                default="Manage cookie settings",
-            ),
-            context=self.request,
-        )
-
-        manage_cc_open = "data-cc-open-settings"
-        if self.get_only_technical_cookies_values():
-            manage_cc_open = "data-cc-open"
 
         endpoint = self.get_registry_settings("registry_endpoint")
         consent_traccking_url = endpoint and '"{}"'.format(endpoint) or "null"
 
         cookie_prefix = '"{}"'.format(self.get_registry_settings("cookie_name"))
 
-        if six.PY2:
-            manage_cookie_label = manage_cookie_label.encode("utf-8")
         return (
             TEMPLATE.replace(
                 "{iframe_cookies_ids_placeholder}",
@@ -308,16 +300,9 @@ class View(BrowserView):
                 self.get_tech_cookies_config(),
             )
             .replace("{settings_placeholder}", self.get_settings())
-            .replace(
-                "{open_settings_placeholder}",
-                manage_cookie_label,
-            )
-            .replace(
-                "{data_cc_open_placeholder}",
-                manage_cc_open,
-            )
             .replace("{consent_tracking_placeholder}", consent_traccking_url)
             .replace("{cookie_prefix}", cookie_prefix)
+            .replace("{settings_icon_placeholder}", self.show_settings_icon())
         )
 
     @view.memoize
@@ -340,9 +325,13 @@ class View(BrowserView):
 
     def get_message_labels(self):
         labels = self.get_registry_settings("header_labels") or "{}"
-        policy_url = self.get_registry_settings("policy_url")
-        if policy_url:
-            labels = labels.replace("{policy_url}", policy_url)
+        policy_url = self.get_registry_settings(name="policy_url", load_json=True)
+        language = api.portal.get_current_language()
+        if policy_url and language in policy_url:
+            url = policy_url[language]
+            if six.PY2:
+                url = url.encode("utf-8")
+            labels = labels.replace("{policy_url}", url)
         return labels
 
     def get_labels(self):
@@ -480,3 +469,23 @@ class View(BrowserView):
             id, domains = mapping.split("|")
             res.append(id)
         return res
+
+    def show_settings_icon(self):
+        if self.get_registry_settings(name="show_settings_icon") == True:
+            manage_cc_open = "data-cc-open-settings"
+            manage_cookie_label = translate(
+                _(
+                    "manage_cookie_settings_label",
+                    default="Manage cookie settings",
+                ),
+                context=self.request,
+            )
+            if six.PY2:
+                manage_cookie_label = manage_cookie_label.encode("utf-8")
+            if self.get_only_technical_cookies_values():
+                manage_cc_open = "data-cc-open"
+            return SETTINGS_ICON_PLACEHOLDER.format(
+                open_settings_placeholder=manage_cookie_label,
+                data_cc_open_placeholder=manage_cc_open,
+            )
+        return ""

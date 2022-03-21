@@ -60,6 +60,22 @@ class IChefCookieSettingsConfigs(Schema):
         ),
         required=False,
     )
+    show_settings_icon = schema.Bool(
+        title=_(
+            "show_settings_icon_label",
+            default=u"Show settings icon",
+        ),
+        description=_(
+            "show_settings_icon_help",
+            default=u"If selected, an icon that opens cookie settings will be "
+            "displayed on the right side of the page. You should always allow "
+            "users to change their settings, so if you disable this option, be "
+            "sure to insert a link somewhere in the page (e.g. in the footer). "
+            "It should be a <a> tag with data-cc-open-settings attribute.",
+        ),
+        required=False,
+        default=True,
+    )
     cookie_name = schema.TextLine(
         title=_("chefcookie_cookie_prefix_label", default=u"Cookie prefix"),
         description=_(
@@ -146,12 +162,16 @@ class IChefCookieSettingsConfigs(Schema):
         required=False,
     )
 
-    policy_url = schema.TextLine(
+    policy_url = schema.SourceText(
         title=_("chefcookie_policy_url_label", default=u"Policy URL"),
         description=_(
             "chefcookie_policy_url_help",
-            default='Insert the cookie policy page URL. This can be used in "Banner header" field as "{policy_url}" to dynamically replace it with the given URL.',
+            default="Insert the cookie policy page URL. One per each language in the website. "
+            'This can be used in "Banner header" field as "{policy_url}" to '
+            "dynamically replace it with the given URL.",
         ),
+        default=u"{}",
+        constraint=validate_cfg_json,
         required=False,
     )
 

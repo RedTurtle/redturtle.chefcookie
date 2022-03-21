@@ -16,6 +16,10 @@ LABELS = {
     "general": {
         "accept": {"en": "Save and continue", "it": "Salva e continua"},
         "accept_all": {"en": "Allow all", "it": "Accetta tutto"},
+        "close": {
+            "en": "Close and accept only technical cookies",
+            "it": "Chiudi e accetta solo i cookie tecnici",
+        },
         "settings_open": {"en": "Personalizza", "it": "Personalizza"},
         "settings_close": {
             "en": "Close settings",

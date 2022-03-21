@@ -24,6 +24,8 @@ Changelog
   [cekk]
 - Handle recaptcha.
   [cekk]
+- policy_url field now can handle multi-language strings.
+  [cekk]
 
 0.2.2 (2022-01-27)
 ------------------

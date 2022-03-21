@@ -3,6 +3,7 @@ from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
 from plone.registry.interfaces import IRegistry
 from redturtle.chefcookie.interfaces import IChefCookieSettings
+from redturtle.chefcookie.defaults import LABELS
 from zope.component import getUtility
 from zope.interface import alsoProvides
 
@@ -33,6 +34,8 @@ def update_to_1002(context):
 
 def to_1100(context):
     registry = getUtility(IRegistry)
+
+    # merge labels
     analytics = registry[
         "redturtle.chefcookie.interfaces.IChefCookieSettings.analytics_cookies_labels"
     ]
@@ -64,3 +67,37 @@ def to_1100(context):
     )
 
     api.portal.set_registry_record("enable_cc", True, interface=IChefCookieSettings)
+
+    # add close label
+    general = json.loads(
+        registry["redturtle.chefcookie.interfaces.IChefCookieSettings.general_labels"]
+    )
+    if "close" not in general:
+        general["close"] = LABELS["general"]["close"]
+        if six.PY2:
+            new_general = json.dumps(general, indent=4).decode("utf-8")
+        else:
+            new_general = json.dumps(general, indent=4)
+
+        api.portal.set_registry_record(
+            "general_labels",
+            new_general,
+            interface=IChefCookieSettings,
+        )
+
+    # convert policy_url to new format
+    lang = api.portal.get_default_language()
+    old_policy_url = registry[
+        "redturtle.chefcookie.interfaces.IChefCookieSettings.policy_url"
+    ]
+    new_policy_url = {lang: old_policy_url}
+    if six.PY2:
+        new_policy_url = json.dumps(new_policy_url, indent=4).decode("utf-8")
+    else:
+        new_policy_url = json.dumps(new_policy_url, indent=4)
+
+    api.portal.set_registry_record(
+        "policy_url",
+        new_policy_url,
+        interface=IChefCookieSettings,
+    )
