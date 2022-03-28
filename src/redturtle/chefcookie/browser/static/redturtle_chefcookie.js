@@ -46,9 +46,9 @@ class redturtlechefcookie extends chefcookie {
                 <div class="chefcookie__inner">
                     <div class="chefcookie__box">
 
-                    <a data-cc-destroy href="#" class="close" title=${this.getLabel(
+                    <a data-cc-destroy href="#" class="close" title="${this.getLabel(
                       "close"
-                    )}></a>
+                    )}"></a>
 
                         <div class="chefcookie__message">${this.translate(
                           this.config.message
@@ -65,59 +65,71 @@ class redturtlechefcookie extends chefcookie {
                                         ? ` chefcookie__group--disabled`
                                         : ``
                                     }">
-                                        <label class="chefcookie__group-label" for="chefcookie_group_${i}">
-                                            <input${
-                                              group.cannot_be_modified
-                                                ? ` disabled="disabled"`
-                                                : ``
-                                            } class="chefcookie__group-checkbox" data-status="${this.isCheckboxActiveForGroup(
+                                        <div class="chefcookie__group_wrapper">
+                                          ${
+                                            "scripts_selection" in
+                                              this.config &&
+                                            this.config.scripts_selection ===
+                                              "collapse" &&
+                                            "scripts" in group &&
+                                            Object.keys(group.scripts).length >
+                                              0 &&
+                                            Object.keys(
+                                              group.scripts
+                                            )[0].indexOf("dummy_") === -1
+                                              ? `
+                                                      <a href="#" class="chefcookie__group-collapse">${
+                                                        this.getLabel(
+                                                          "group_open"
+                                                        ) != ""
+                                                          ? this.getLabel(
+                                                              "group_open"
+                                                            )
+                                                          : this.getLabel(
+                                                              "settings_open"
+                                                            )
+                                                      }</a>
+                                                  `
+                                              : ``
+                                          }
+                                          <label class="chefcookie__group-label" for="chefcookie_group_${i}">
+                                              ${this.translate(
+                                                group.title
+                                              )} <span class="show-info" aria-controls="chefcookie_group_${i}_description">
+
+                                              ${
+                                                "description" in group &&
+                                                group.description != ""
+                                                  ? `
+                                              <span class="chefcookie__group-description" id="chefcookie_group_${i}_description">${this.translate(
+                                                      group.description
+                                                    )}</span>
+                                              `
+                                                  : ``
+                                              }
+                                              </span>
+
+                                          </label>
+
+
+                                          <input${
+                                            group.cannot_be_modified
+                                              ? ` disabled="disabled"`
+                                              : ``
+                                          } class="chefcookie__group-checkbox" data-status="${this.isCheckboxActiveForGroup(
                                       i
-                                    )}" id="chefcookie_group_${i}" type="checkbox" name="chefcookie_group[]" value="${i}"${
+                                    )}" id="chefcookie_group_${i}" type="checkbox" role="checkbox" aria-describedby="chefcookie_group_${i}_description" aria-checked="${
+                                      this.isCheckboxActiveForGroup(i) === 2
+                                        ? "true"
+                                        : "false"
+                                    }" name="chefcookie_group[]" value="${i}"${
                                       this.isCheckboxActiveForGroup(i) === 2
                                         ? ` checked="checked"`
                                         : ``
                                     } />
-                                            <span class="chefcookie__group-title">${this.translate(
-                                              group.title
-                                            )}</span>
-                                            <span class="chefcookie__group-checkbox-icon"></span>
-                                            ${
-                                              "description" in group &&
-                                              group.description != ""
-                                                ? `
-                                            <span class="chefcookie__group-description">${this.translate(
-                                              group.description
-                                            )}</span>
-                                            `
-                                                : ``
-                                            }
-                                            ${
-                                              "scripts_selection" in
-                                                this.config &&
-                                              this.config.scripts_selection ===
-                                                "collapse" &&
-                                              "scripts" in group &&
-                                              Object.keys(group.scripts)
-                                                .length > 0 &&
-                                              Object.keys(
-                                                group.scripts
-                                              )[0].indexOf("dummy_") === -1
-                                                ? `
-                                                        <a href="#" class="chefcookie__group-collapse">${
-                                                          this.getLabel(
-                                                            "group_open"
-                                                          ) != ""
-                                                            ? this.getLabel(
-                                                                "group_open"
-                                                              )
-                                                            : this.getLabel(
-                                                                "settings_open"
-                                                              )
-                                                        }</a>
-                                                    `
-                                                : ``
-                                            }
-                                        </label>
+                                      <span class="chefcookie__group-checkbox-icon"></span>
+                                    </div>
+
                                         ${
                                           "scripts_selection" in this.config &&
                                           this.config.scripts_selection !==
@@ -227,6 +239,7 @@ class redturtlechefcookie extends chefcookie {
                                             `
                                             : ``
                                         }
+
                                     </li>
                                 `
                                   )

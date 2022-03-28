@@ -54,6 +54,49 @@ html.chefcookie--blur body:after {
   height: auto;
 }
 
+#cc-banner .chefcookie__group .chefcookie__group_wrapper {
+  display: flex;
+  position: relative;
+}
+
+#cc-banner
+  .chefcookie__group
+  .chefcookie__group_wrapper
+  .chefcookie__group-label {
+  width: auto;
+  flex: 1 1 50%;
+  position: relative;
+}
+
+#cc-banner
+  .chefcookie__group
+  .chefcookie__group_wrapper
+  .chefcookie__group-description {
+  display: none;
+  position: absolute;
+  left: 20px;
+  width: 300px;
+  background-color: #fff;
+  border: 1px solid grey;
+  padding: 1.5rem;
+  z-index: 1;
+}
+
+#cc-banner .show-info {
+  position: relative;
+  background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPiAgICA8cGF0aCBkPSJNIDEyIDIgQyA2LjQ4ODk5NzEgMiAyIDYuNDg4OTk3MSAyIDEyIEMgMiAxNy41MTEwMDMgNi40ODg5OTcxIDIyIDEyIDIyIEMgMTcuNTExMDAzIDIyIDIyIDE3LjUxMTAwMyAyMiAxMiBDIDIyIDYuNDg4OTk3MSAxNy41MTEwMDMgMiAxMiAyIHogTSAxMiA0IEMgMTYuNDMwMTIzIDQgMjAgNy41Njk4Nzc0IDIwIDEyIEMgMjAgMTYuNDMwMTIzIDE2LjQzMDEyMyAyMCAxMiAyMCBDIDcuNTY5ODc3NCAyMCA0IDE2LjQzMDEyMyA0IDEyIEMgNCA3LjU2OTg3NzQgNy41Njk4Nzc0IDQgMTIgNCB6IE0gMTEgNyBMIDExIDkgTCAxMyA5IEwgMTMgNyBMIDExIDcgeiBNIDExIDExIEwgMTEgMTcgTCAxMyAxNyBMIDEzIDExIEwgMTEgMTEgeiIvPjwvc3ZnPg==");
+  width: 16px;
+  height: 16px;
+  background-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#cc-banner .show-info:hover .chefcookie__group-description,
+#cc-banner .show-info:focus .chefcookie__group-description {
+  display: block;
+}
+
 #cc-banner
   .chefcookie__group.chefcookie__group--disabled
   .chefcookie__group-checkbox[data-status="2"]
@@ -171,21 +214,6 @@ html.chefcookie--blur body:after {
   .chefcookie__box
   .chefcookie__settings-container.chefcookie__settings-container--visible {
   display: block;
-}
-
-#cc-banner
-  .chefcookie__group
-  label.chefcookie__group-label
-  input.chefcookie__group-checkbox:focus
-  + .chefcookie__group-title
-  + .chefcookie__group-checkbox-icon,
-#cc-banner
-  .chefcookie__script
-  label
-  input.chefcookie__script-checkbox:focus
-  + .chefcookie__script-title
-  + .chefcookie__script-checkbox-icon {
-  box-shadow: 0 0 5px 5px #aaa;
 }
 
 #cc-banner
