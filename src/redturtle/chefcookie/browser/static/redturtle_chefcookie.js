@@ -46,7 +46,9 @@ class redturtlechefcookie extends chefcookie {
                 <div class="chefcookie__inner">
                     <div class="chefcookie__box">
 
-                        <a data-cc-destroy href="#" class="close"></a>
+                    <a data-cc-destroy href="#" class="close" title=${this.getLabel(
+                      "close"
+                    )}></a>
 
                         <div class="chefcookie__message">${this.translate(
                           this.config.message
