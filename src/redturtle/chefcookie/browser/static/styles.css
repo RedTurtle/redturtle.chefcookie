@@ -218,7 +218,8 @@ html.chefcookie--blur body:after {
 }
 
 #cc-banner .chefcookie__box .chefcookie__message a:focus {
-  opacity: 0.5;
+  color: #000;
+  font-weight: bold;
 }
 
 #cc-banner
