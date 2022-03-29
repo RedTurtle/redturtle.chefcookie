@@ -8,6 +8,7 @@ class redturtlechefcookie extends chefcookie {
       if (el.classList.contains("chefcookie__settings-container--visible")) {
         el.style.height = "auto";
       }
+      el.focus();
     }, this.animationSpeed);
     this.fixMaxHeight();
   }
@@ -53,7 +54,7 @@ class redturtlechefcookie extends chefcookie {
                         <div class="chefcookie__message">${this.translate(
                           this.config.message
                         )}</div>
-                        <div class="chefcookie__settings-container">
+                        <div class="chefcookie__settings-container" id="chefcookie__settings" tabindex="0">
                             <ul class="chefcookie__groups chefcookie__groups--count-${
                               this.config.settings.length
                             }">
@@ -291,7 +292,7 @@ class redturtlechefcookie extends chefcookie {
                               //         : 'accept_all'
                               // )}</a>
                             }
-                            <a href="#chefcookie__settings" class="chefcookie__button chefcookie__button--settings" role="button">${this.getLabel(
+                            <a href="#chefcookie__settings" class="chefcookie__button chefcookie__button--settings" aria-controls="chefcookie__settings" role="button">${this.getLabel(
                               "settings_open"
                             )}</a>
                             <a href="#chefcookie__accept" style="display:none" class="chefcookie__button chefcookie__button--accept" role="button">${this.getLabel(

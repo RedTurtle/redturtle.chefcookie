@@ -312,8 +312,8 @@ export default class chefcookie {
             }
             /* try to reset styles */
             .chefcookie h2,
-            .chefcookie a:link, 
-            .chefcookie a:hover, 
+            .chefcookie a:link,
+            .chefcookie a:hover,
             .chefcookie a:visited
             {
                 color:inherit;
