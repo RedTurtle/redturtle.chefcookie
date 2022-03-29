@@ -47,12 +47,6 @@ html.chefcookie--blur body:after {
   border-color: unset;
   color: inherit !important;
 }
-#cc-banner .chefcookie__script-description-collapse {
-  display: none;
-}
-#cc-banner .chefcookie__script-description-content {
-  height: auto;
-}
 
 #cc-banner .chefcookie__group .chefcookie__group_wrapper {
   display: flex;
@@ -66,6 +60,7 @@ html.chefcookie--blur body:after {
   width: auto;
   flex: 1 1 50%;
   position: relative;
+  font-size: 1.7rem;
 }
 
 #cc-banner
@@ -95,6 +90,33 @@ html.chefcookie--blur body:after {
 #cc-banner .show-info:hover .chefcookie__group-description,
 #cc-banner .show-info:focus .chefcookie__group-description {
   display: block;
+}
+
+#cc-banner ul.chefcookie__scripts {
+  display: flex;
+  margin-top: 1rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  flex-wrap: wrap;
+}
+#cc-banner ul.chefcookie__scripts li.chefcookie__script {
+  flex: 0 1 33.333%;
+}
+#cc-banner ul.chefcookie__scripts li.chefcookie__script:first-child {
+  margin-top: 0;
+}
+
+#cc-banner
+  ul.chefcookie__scripts
+  li.chefcookie__script
+  .chefcookie__script_wrapper {
+  background-color: #ccc;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+#cc-banner .chefcookie__script::marker {
+  content: none;
 }
 
 #cc-banner
@@ -206,6 +228,10 @@ html.chefcookie--blur body:after {
   background-color: #cccccc;
 }
 
+#cc-banner .chefcookie__settings-container {
+  overflow: visible;
+}
+
 #cc-banner .chefcookie__box .chefcookie__settings-container {
   display: none;
   height: auto;
@@ -259,5 +285,9 @@ a#cookie-settings-open svg {
   .close {
     right: 10px;
     top: 10px;
+  }
+
+  #cc-banner ul.chefcookie__scripts li.chefcookie__script {
+    flex: 0 1 50%;
   }
 }

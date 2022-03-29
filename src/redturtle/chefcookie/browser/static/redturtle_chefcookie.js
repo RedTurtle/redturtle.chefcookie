@@ -159,12 +159,13 @@ class redturtlechefcookie extends chefcookie {
                                                             ? ` chefcookie__script--disabled`
                                                             : ``
                                                         }">
-                                                            <label class="chefcookie__script-label" for="chefcookie_script_${i}_${j}">
-                                                                <input${
-                                                                  group.cannot_be_modified
-                                                                    ? ` disabled="disabled"`
-                                                                    : ``
-                                                                } class="chefcookie__script-checkbox" id="chefcookie_script_${i}_${j}" type="checkbox" name="chefcookie_script[]" value="${i}|${j}"${
+                                                            <div class="chefcookie__script_wrapper">
+                                                              <label class="chefcookie__script-label" for="chefcookie_script_${i}_${j}">
+                                                                  <input${
+                                                                    group.cannot_be_modified
+                                                                      ? ` disabled="disabled"`
+                                                                      : ``
+                                                                  } class="chefcookie__script-checkbox" id="chefcookie_script_${i}_${j}" aria-describedby="chefcookie_script_${i}_${j}_description" type="checkbox" name="chefcookie_script[]" value="${i}|${j}"${
                                                           this.isCheckboxActiveForProvider(
                                                             i,
                                                             j
@@ -172,65 +173,85 @@ class redturtlechefcookie extends chefcookie {
                                                             ? ` checked="checked"`
                                                             : ``
                                                         } />
-                                                                <span class="chefcookie__script-title">${
-                                                                  typeof group
-                                                                    .scripts[
-                                                                    j
-                                                                  ] ===
-                                                                    "object" &&
-                                                                  group.scripts[
-                                                                    j
-                                                                  ] !== null &&
-                                                                  "title" in
+                                                                  <span class="chefcookie__script-title">${
+                                                                    typeof group
+                                                                      .scripts[
+                                                                      j
+                                                                    ] ===
+                                                                      "object" &&
                                                                     group
                                                                       .scripts[
                                                                       j
-                                                                    ] &&
-                                                                  group.scripts[
-                                                                    j
-                                                                  ].title != ""
-                                                                    ? this.translate(
-                                                                        group
-                                                                          .scripts[
-                                                                          j
-                                                                        ].title
-                                                                      )
-                                                                    : j
-                                                                }</span>
-                                                                <span class="chefcookie__script-checkbox-icon"></span>
-                                                            </label>
-                                                            ${
-                                                              typeof group
-                                                                .scripts[j] ===
-                                                                "object" &&
-                                                              group.scripts[
-                                                                j
-                                                              ] !== null &&
-                                                              "description" in
+                                                                    ] !==
+                                                                      null &&
+                                                                    "title" in
+                                                                      group
+                                                                        .scripts[
+                                                                        j
+                                                                      ] &&
+                                                                    group
+                                                                      .scripts[
+                                                                      j
+                                                                    ].title !=
+                                                                      ""
+                                                                      ? this.translate(
+                                                                          group
+                                                                            .scripts[
+                                                                            j
+                                                                          ]
+                                                                            .title
+                                                                        )
+                                                                      : j
+                                                                  }</span>
+                                                                  <span class="chefcookie__script-checkbox-icon"></span>
+                                                              </label>
+                                                              ${
+                                                                typeof group
+                                                                  .scripts[
+                                                                  j
+                                                                ] ===
+                                                                  "object" &&
                                                                 group.scripts[
                                                                   j
-                                                                ] &&
-                                                              group.scripts[j]
-                                                                .description !=
-                                                                ""
-                                                                ? '<div class="chefcookie__script-description">' +
-                                                                  '<a href="#" class="chefcookie__script-description-collapse">' +
-                                                                  this.getLabel(
-                                                                    "details_open"
-                                                                  ) +
-                                                                  "</a>" +
-                                                                  '<div class="chefcookie__script-description-content">' +
-                                                                  this.translate(
-                                                                    group
-                                                                      .scripts[
-                                                                      j
-                                                                    ]
-                                                                      .description
-                                                                  ) +
-                                                                  "</div>" +
-                                                                  "</div>"
-                                                                : ""
-                                                            }
+                                                                ] !== null &&
+                                                                "description" in
+                                                                  group.scripts[
+                                                                    j
+                                                                  ] &&
+                                                                group.scripts[j]
+                                                                  .description !=
+                                                                  ""
+                                                                  ? '<div class="chefcookie__script-description">' +
+                                                                    '<a href="#" class="chefcookie__script-description-collapse" aria-controls="chefcookie_script_' +
+                                                                    i +
+                                                                    "_" +
+                                                                    j +
+                                                                    '_description" aria-label="' +
+                                                                    this.getLabel(
+                                                                      "details_open"
+                                                                    ) +
+                                                                    '">' +
+                                                                    this.getLabel(
+                                                                      "details_open"
+                                                                    ) +
+                                                                    "</a>" +
+                                                                    '<div class="chefcookie__script-description-content" id="chefcookie_script_' +
+                                                                    i +
+                                                                    "_" +
+                                                                    j +
+                                                                    '_description">' +
+                                                                    this.translate(
+                                                                      group
+                                                                        .scripts[
+                                                                        j
+                                                                      ]
+                                                                        .description
+                                                                    ) +
+                                                                    "</div>" +
+                                                                    "</div>"
+                                                                  : ""
+                                                              }
+                                                            </div>
                                                         </li>
                                                     `
                                                       )
