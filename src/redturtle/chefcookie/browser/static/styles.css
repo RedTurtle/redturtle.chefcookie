@@ -124,7 +124,17 @@ html.chefcookie--blur body:after {
 #cc-banner .chefcookie__script::marker {
   content: none;
 }
+#cc-banner
+  .chefcookie__group-checkbox:focus
+  ~ .chefcookie__group-checkbox-icon {
+  box-shadow: 0px 0px 6px 3px #6a6a6a;
+}
 
+#cc-banner
+  .chefcookie__script-checkbox:focus
+  ~ .chefcookie__script-checkbox-icon {
+  box-shadow: 0px 0px 6px 3px #fff;
+}
 #cc-banner
   .chefcookie__group.chefcookie__group--disabled
   .chefcookie__group-checkbox[data-status="2"]
