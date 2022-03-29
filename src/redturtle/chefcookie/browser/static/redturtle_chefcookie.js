@@ -93,9 +93,10 @@ class redturtlechefcookie extends chefcookie {
                                               : ``
                                           }
                                           <label class="chefcookie__group-label" for="chefcookie_group_${i}">
-                                              ${this.translate(
-                                                group.title
-                                              )} <span class="show-info" aria-controls="chefcookie_group_${i}_description">
+                                              <span class="chefcookie__group-label-text">
+                                                ${this.translate(group.title)}
+                                              </span>
+                                              <span class="show-info" aria-controls="chefcookie_group_${i}_description">
 
                                               ${
                                                 "description" in group &&
@@ -109,14 +110,11 @@ class redturtlechefcookie extends chefcookie {
                                               }
                                               </span>
 
-                                          </label>
-
-
-                                          <input${
-                                            group.cannot_be_modified
-                                              ? ` disabled="disabled"`
-                                              : ``
-                                          } class="chefcookie__group-checkbox" data-status="${this.isCheckboxActiveForGroup(
+                                              <input${
+                                                group.cannot_be_modified
+                                                  ? ` disabled="disabled"`
+                                                  : ``
+                                              } class="chefcookie__group-checkbox" data-status="${this.isCheckboxActiveForGroup(
                                       i
                                     )}" id="chefcookie_group_${i}" type="checkbox" role="checkbox" aria-describedby="chefcookie_group_${i}_description" aria-checked="${
                                       this.isCheckboxActiveForGroup(i) === 2
@@ -127,7 +125,12 @@ class redturtlechefcookie extends chefcookie {
                                         ? ` checked="checked"`
                                         : ``
                                     } />
-                                      <span class="chefcookie__group-checkbox-icon"></span>
+                                    <span class="chefcookie__group-checkbox-icon"></span>
+                                          </label>
+
+
+
+
                                     </div>
 
                                         ${
