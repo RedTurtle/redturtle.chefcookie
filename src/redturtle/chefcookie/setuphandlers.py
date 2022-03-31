@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
+from redturtle.chefcookie.defaults import ANCHOR_MAPPING
+from redturtle.chefcookie.defaults import IFRAMES_MAPPING
+from redturtle.chefcookie.interfaces import IChefCookieSettings
 from zope.interface import implementer
 
 
@@ -14,7 +18,13 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
-    # Do something at the end of the installation of this package.
+    # set defaults to some registry keys
+    api.portal.set_registry_record(
+        "links_mapping", ANCHOR_MAPPING, interface=IChefCookieSettings
+    )
+    api.portal.set_registry_record(
+        "iframes_mapping", IFRAMES_MAPPING, interface=IChefCookieSettings
+    )
 
 
 def uninstall(context):

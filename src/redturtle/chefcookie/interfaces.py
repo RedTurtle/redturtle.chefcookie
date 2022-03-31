@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from redturtle.chefcookie import _
-from redturtle.chefcookie.defaults import ANCHOR_MAPPING
 from redturtle.chefcookie.defaults import GENERAL_LABELS
 from redturtle.chefcookie.defaults import HEADER_LABELS
-from redturtle.chefcookie.defaults import IFRAMES_MAPPING
 from redturtle.chefcookie.defaults import PROFILING_COOKIES_LABELS
 from redturtle.chefcookie.defaults import PROFILING_COOKIES_SPECIFIC_LABELS
 from redturtle.chefcookie.defaults import TECHNICAL_COOKIES_LABELS
@@ -181,7 +179,7 @@ class IChefCookieSettingsConfigs(Schema):
             "chefcookie_iframes_mapping_labels_help",
             default=u"Insert a list of mappings between a provider and a list of possible domains for their iframes. If the user blocks their cookies, the iframes will be blocked as well.",
         ),
-        default=IFRAMES_MAPPING,
+        default=[],
         missing_value=[],
         value_type=schema.TextLine(),
         required=False,
@@ -192,7 +190,7 @@ class IChefCookieSettingsConfigs(Schema):
             "chefcookie_links_mapping_labels_help",
             default=u"Insert a list of mappings between a provider and a list of possible links xpath selector for their anchor. If the user blocks their cookies, the provider will be blocked as well.",
         ),
-        default=ANCHOR_MAPPING,
+        default=[],
         missing_value=[],
         value_type=schema.TextLine(),
         required=False,
