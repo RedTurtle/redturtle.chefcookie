@@ -94,9 +94,9 @@ class redturtlechefcookie extends chefcookie {
                                               : ``
                                           }
                                           <label class="chefcookie__group-label" for="chefcookie_group_${i}">
-                                              <span class="chefcookie__group-label-text">
+                                              <h3 class="chefcookie__group-label-text">
                                                 ${this.translate(group.title)}
-                                              </span>
+                                              </h3>
                                               <span class="show-info" aria-controls="chefcookie_group_${i}_description">
 
                                               ${
@@ -226,7 +226,7 @@ class redturtlechefcookie extends chefcookie {
                                                                   .description !=
                                                                   ""
                                                                   ? '<div class="chefcookie__script-description">' +
-                                                                    '<a href="#" class="chefcookie__script-description-collapse" aria-controls="chefcookie_script_' +
+                                                                    '<a href="#" class="chefcookie__script-description-collapse" aria-hidden="true" aria-controls="chefcookie_script_' +
                                                                     i +
                                                                     "_" +
                                                                     j +

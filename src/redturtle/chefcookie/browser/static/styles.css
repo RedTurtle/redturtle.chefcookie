@@ -67,6 +67,7 @@ html.chefcookie--blur body:after {
   .chefcookie__group-label
   .chefcookie__group-label-text {
   font-size: 1.8rem;
+  display: inline-block;
 }
 
 #cc-banner
