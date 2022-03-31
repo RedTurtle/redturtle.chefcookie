@@ -41,6 +41,14 @@ class GetChefcookieJs(ViewletBase):
         except Exception:
             return False
 
+    def get_cc_config_version(self):
+        try:
+            cc = self.context.portal_registry.forInterface(IChefCookieSettings)
+
+            return getattr(cc, "cookie_name", "")
+        except Exception:
+            return ""
+
     def get_js_urls(self):
         """
         return the list of javascript files
@@ -58,7 +66,7 @@ class GetChefcookieJs(ViewletBase):
             CONFIG_URL.format(
                 portal_url=portal_url,
                 name="cookie_config.js",
-                version=version,
+                version="{}_{}".format(version, self.get_cc_config_version()),
             ),
         )
 
