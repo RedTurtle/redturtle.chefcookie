@@ -90,8 +90,7 @@ class ChefcookieIframeTransform(object):
 
         try:
             self.chefcookie_registry_record = registry.forInterface(IChefCookieSettings)
-        except KeyError as e:
-            logger.exception(e)
+        except KeyError:
             return
 
         if not self.chefcookie_registry_record.enable_cc and domain_allowed(  # noqa
