@@ -50,7 +50,7 @@ class ChefcookieIframeTransform(object):
                 continue
             domains = domains.split(",")
             for domain in domains:
-                if domain in src:
+                if domain.strip() in src:
                     return name
         return ""
 
@@ -103,7 +103,6 @@ class ChefcookieIframeTransform(object):
             result = getHTMLSerializer(result)
         except (AttributeError, TypeError, etree.ParseError):
             return
-
         for iframe in result.tree.xpath("//iframe"):
             self.transform_iframe(iframe)
 
