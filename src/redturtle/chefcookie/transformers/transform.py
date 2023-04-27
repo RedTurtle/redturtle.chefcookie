@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 @adapter(Interface, IRedturtleChefcookieLayer)  # any context, any request
 class ChefcookieIframeTransform(object):
 
-    order = 8887  #  just one less than collective.lazysizes
+    order = 8887  # just one less than collective.lazysizes
 
     def __init__(self, published, request):
         self.published = published
