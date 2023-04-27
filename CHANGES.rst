@@ -4,7 +4,8 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- remove default set cookie
+  [mamico]
 
 
 2.0.1 (2022-11-08)

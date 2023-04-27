@@ -358,7 +358,7 @@ class View(BrowserView):
         res = {
             "checked_by_default": True,
             "cannot_be_modified": True,
-            "initial_tracking": True,
+            "initial_tracking": False,
         }
 
         labels = self.get_registry_settings(name="technical_cookies_labels")
