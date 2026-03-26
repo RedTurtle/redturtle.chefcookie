@@ -4,7 +4,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 6 compatibility. Use 2.x tags for Plone < 6. [cekk]
+  [cekk]
 
 
 2.1.0 (2023-05-31)
@@ -50,10 +51,10 @@ Changelog
 - Add flag to control panel that allow to enable cookie banner
 - Add cookie prefix to control panel to control the js plugin option
 - Allow to select endpoint for consent registry
-- Add domain whitelist so in case you have site with multiple domain can show 
+- Add domain whitelist so in case you have site with multiple domain can show
   the banner in selected domain
 - Add matomo
-- Some minor fix to prevent cases where site editor remove configuration lines 
+- Some minor fix to prevent cases where site editor remove configuration lines
   partially
 - Add log tracking to new introduced actions
 - Fix problem loading twitter timeline in tile manager from
