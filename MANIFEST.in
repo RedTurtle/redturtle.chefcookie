@@ -15,3 +15,5 @@ exclude .flake8
 prune src/redturtle/chefcookie/browser/static/chefcookie/_build
 prune src/redturtle/chefcookie/browser/static/chefcookie/node_modules
 prune src/redturtle/chefcookie/locales/__pycache__
+include constraints_plone60.txt
+include constraints_plone61.txt
