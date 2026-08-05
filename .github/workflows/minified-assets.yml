@@ -1,0 +1,21 @@
+name: Minified assets
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # git checkout
+      - uses: actions/checkout@v2
+
+      # node setup (esbuild is fetched on the fly via npx)
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # regenerate redturtle_chefcookie(.tech).min.js and styles.min.css
+      # and fail if that produces a diff: it means a source file was
+      # edited without regenerating its minified counterpart.
+      - name: check minified assets are up to date
+        run: make check-minified

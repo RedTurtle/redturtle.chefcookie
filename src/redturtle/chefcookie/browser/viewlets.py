@@ -16,7 +16,7 @@ else:
 
 CHEFCOOKIE_URL = "{portal_url}/++resource++redturtle.chefcookie/chefcookie/chefcookie.min.js?v={version}"
 RT_CHEFCOOKIE_URL = (
-    "{portal_url}/++resource++redturtle.chefcookie/{type}.js?v={version}"
+    "{portal_url}/++resource++redturtle.chefcookie/{type}.min.js?v={version}"
 )
 CONFIG_URL = "{portal_url}/{name}?v={version}"
 
@@ -71,7 +71,7 @@ class GetChefcookieJs(ViewletBase):
         )
 
     def get_css_link(self):
-        return "{portal_url}/++resource++redturtle.chefcookie/styles.css?v={version}".format(
+        return "{portal_url}/++resource++redturtle.chefcookie/styles.min.css?v={version}".format(
             portal_url=api.portal.get().portal_url(),
             version=self.get_version(),
         )

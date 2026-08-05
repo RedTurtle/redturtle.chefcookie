@@ -4,7 +4,10 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Serve minified versions of ``redturtle_chefcookie.js``, ``redturtle_chefcookie_tech.js`` and ``styles.css``.
+  [mamico]
+- Add ``defer`` attribute to injected script tags so they no longer block HTML parsing.
+  [mamico]
 
 
 3.0.0 (2026-03-26)
